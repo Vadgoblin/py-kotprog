@@ -20,7 +20,7 @@ field = Field()
 field.spawn_zombie(4)
 
 while True:
-    field.onTick()
+    field.on_tick()
 
     screen.blit(bg, (0, 0))
     field.draw(screen)

@@ -38,13 +38,23 @@ class Field:
             ArgumentTypeError(f"Expected row to be an integer between 0 and {self._rows - 1}, got {row}")
         self._zombies[row].append(Zombie(row))
 
+    def plant_plant(self, plant_type, row, col):
+        if not isinstance(row,int) or row < 0 or row >= self._rows:
+            ArgumentTypeError(f"Expected row to be an integer between 0 and {self._rows - 1}, got {row}")
+        if not isinstance(col,int) or col < 0 or col >= self._columns:
+            ArgumentTypeError(f"Expected row to be an integer between 0 and {self._columns - 1}, got {col}")
+        if self._plants[row][col] is not None:
+            Exception(f"There is already a plant at row {row} column {col}")
+
+
+
 
     def draw(self, screen):
         for row in range(self._rows):
             for zombie in self._zombies[row]:
                 zombie.draw(screen)
 
-    def onTick(self):
+    def on_tick(self):
         for row in range(self._rows):
             for zombie in self._zombies[row]:
-                zombie.onTick()
+                zombie.on_tick()
