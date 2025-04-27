@@ -33,7 +33,6 @@ class ConfigManager:
             "height": 80,
             "offset_x": 0,
             "offset_y": 20,
-            "types":["peashooter"],
             "peashooter":{
                 "hp" : 8,
                 "sprite" : "assets/peashooter.png",

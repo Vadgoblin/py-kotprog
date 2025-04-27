@@ -18,7 +18,7 @@ clock = pygame.time.Clock()
 
 field = Field()
 field.spawn_zombie(4)
-field.plant_plant("",0,0)
+field.plant_plant("peashooter",0,0)
 
 while True:
     field.on_tick()
