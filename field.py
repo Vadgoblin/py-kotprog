@@ -1,6 +1,7 @@
 from argparse import ArgumentTypeError
 
 import configManager
+import plants.peashooter
 from zombie import Zombie
 
 config = configManager.ConfigManager()
@@ -32,6 +33,8 @@ class Field:
         self._plants = []
         for row in range(self._rows):
             self._plants.append([])
+            for _ in range(self._columns):
+                self._plants[row].append(None)
 
     def spawn_zombie(self, row):
         if not isinstance(row,int) or row < 0 or row >= self._rows:
@@ -46,10 +49,17 @@ class Field:
         if self._plants[row][col] is not None:
             Exception(f"There is already a plant at row {row} column {col}")
 
+        self._plants[row][col] = plants.peashooter.Peashooter(row, col)
+
 
 
 
     def draw(self, screen):
+        for row in range(self._rows):
+            for col in range(self._columns):
+                plant = self._plants[row][col]
+                if plant is not None:
+                    plant.draw(screen)
         for row in range(self._rows):
             for zombie in self._zombies[row]:
                 zombie.draw(screen)

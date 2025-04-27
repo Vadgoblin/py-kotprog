@@ -24,7 +24,7 @@ class Zombie:
         position = (self.x + offset_x, self.y + offset_y)
         screen.blit(self.sprite, position)
 
-    def onTick(self):
+    def on_tick(self):
         self.move()
 
     def move(self):

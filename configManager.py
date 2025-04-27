@@ -26,6 +26,13 @@ class ConfigManager:
             "zombie_offset_y" : -40,
             "zombie_spawn_x" : 1080,
 
+            "plant_offset_x" : 0,
+            "plant_offset_y" : 20,
+            "plant_width": 80,
+            "plant_height" : 80,
+            "peashooter_sprite" : "assets/peashooter.png",
+            "peashooter_hp" : 8,
+
             "field_pos": (260, 169),
             "field_size" : (990-260,675-169),
             "field_rows" : 5,
