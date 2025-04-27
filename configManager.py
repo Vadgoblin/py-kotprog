@@ -18,6 +18,9 @@ class ConfigManager:
         self._configs = {
             "windowWidth" : 1080,
             "windowHeight" : 700,
+
+            "zombieSize" : (78, 140),
+            "zombieSprite" : "assets/zombie.png"
         }
 
     def get(self, key):
