@@ -1,32 +1,31 @@
-import pygame
-from PIL import Image
+import field
 import spriteLoader
 import configManager
 
 config = configManager.ConfigManager()
+offset_x = config.get("zombie_offset_x")
+offset_y = config.get("zombie_offset_y")
+spawn_x = config.get("zombie_spawn_x")
+
+def _load_sprite():
+    size = config.get("zombie_size")
+    sprite_path = config.get("zombie_sprite")
+    return spriteLoader.load(sprite_path,size)
+
 
 class Zombie:
-    def __init__(self):
-        self.hp = 10
-        self.x = 8
-        self.y = 3
-
-        size = config.get("zombie_size")
-        sprite_path = config.get("zombie_sprite")
-        self.sprite = spriteLoader.load(sprite_path,size)
+    def __init__(self, row):
+        self.row = row
+        self.y = field.row_to_y(row)
+        self.x = spawn_x
+        self.sprite = _load_sprite()
 
     def draw(self, screen):
-        abs_pos = _calculate_absolute_position(self.x, self.y)
-        screen.blit(self.sprite, abs_pos)
+        position = (self.x + offset_x, self.y + offset_y)
+        screen.blit(self.sprite, position)
+
+    def onTick(self):
+        self.move()
 
     def move(self):
-        self.x -= 0.01
-
-def _calculate_absolute_position(x,y):
-    field_width, field_height = config.get("field_size")
-    field_x, field_y = config.get("field_pos")
-    field_block_width = field_width / config.get("field_columns")
-    field_block_height = field_height / config.get("field_rows")
-    abs_x = field_x + (x * field_block_width)
-    abs_y = field_y + (y * field_block_height) - 40
-    return abs_x,abs_y
+        self.x -= 1

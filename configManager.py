@@ -22,6 +22,9 @@ class ConfigManager:
 
             "zombie_size" : (78, 140),
             "zombie_sprite" : "assets/zombie.png",
+            "zombie_offset_x" : 0,
+            "zombie_offset_y" : -40,
+            "zombie_spawn_x" : 1080,
 
             "field_pos": (260, 169),
             "field_size" : (990-260,675-169),
