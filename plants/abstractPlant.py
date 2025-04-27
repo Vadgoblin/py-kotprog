@@ -18,7 +18,7 @@ class AbstractPlant(ABC):
         pass
 
     def draw(self, screen):
-        x = field.col_to_x(self._row) + self._offset_x
+        x = field.col_to_x(self._col) + self._offset_x
         y = field.row_to_y(self._row) + self._offset_y
         screen.blit(self._sprite, (x,y))
 

@@ -1,5 +1,7 @@
 import configManager
-import plants.plantFactory
+# import plants.plantFactory, plants.abstractPlant
+from plants.plantFactory import plantFactory
+from plants.abstractPlant import AbstractPlant
 from zombie import Zombie
 
 config = configManager.ConfigManager().field
@@ -46,29 +48,24 @@ class Field:
             raise Exception(f"Expected row to be an integer between 0 and {self._columns - 1}, got {col}")
         if self._plants[row][col] is not None:
             raise Exception(f"There is already a plant at row {row} column {col}")
-
-        self._plants[row][col] = plants.plantFactory.plantFactory(plant_type, row, col)
-
-
-
+        self._plants[row][col] = plantFactory(plant_type, row, col)
 
     def draw(self, screen):
-        for row in range(self._rows):
-            for col in range(self._columns):
-                plant = self._plants[row][col]
-                if plant is not None:
-                    plant.draw(screen)
-        for row in range(self._rows):
-            for zombie in self._zombies[row]:
-                zombie.draw(screen)
+        self._iterate_plants(AbstractPlant.draw, screen)
+        self._iterate_zombies(Zombie.draw, screen)
 
     def on_tick(self):
+        self._iterate_plants(AbstractPlant.on_tick)
+        self._iterate_zombies(Zombie.on_tick)
+
+    def _iterate_plants(self, action, *args):
         for row in range(self._rows):
             for col in range(self._columns):
                 plant = self._plants[row][col]
                 if plant is not None:
-                    plant.on_tick()
+                    action(plant, *args)
+
+    def _iterate_zombies(self, action, *args):
         for row in range(self._rows):
             for zombie in self._zombies[row]:
-                zombie.on_tick()
-                
+                action(zombie, *args)
