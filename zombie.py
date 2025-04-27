@@ -2,14 +2,14 @@ import field
 import spriteLoader
 import configManager
 
-config = configManager.ConfigManager()
-offset_x = config.get("zombie_offset_x")
-offset_y = config.get("zombie_offset_y")
-spawn_x = config.get("zombie_spawn_x")
+config = configManager.ConfigManager().zombie
+offset_x = config["offset_x"]
+offset_y = config["offset_y"]
+spawn_x = config["spawn_x"]
 
 def _load_sprite():
-    size = config.get("zombie_size")
-    sprite_path = config.get("zombie_sprite")
+    size = (config["width"], config["height"])
+    sprite_path = config["sprite"]
     return spriteLoader.load(sprite_path,size)
 
 

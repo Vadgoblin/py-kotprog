@@ -1,4 +1,4 @@
-import json
+from types import MappingProxyType
 
 class ConfigManager:
     _instance = None
@@ -15,31 +15,40 @@ class ConfigManager:
         return cls._instance
 
     def __init__(self):
-        self._configs = {
-            "window_width" : 1080,
-            "window_height" : 700,
-            "target_tick_time" : 60,
-
-            "zombie_size" : (78, 140),
-            "zombie_sprite" : "assets/zombie.png",
-            "zombie_offset_x" : 0,
-            "zombie_offset_y" : -40,
-            "zombie_spawn_x" : 1080,
-
-            "plant_offset_x" : 0,
-            "plant_offset_y" : 20,
-            "plant_width": 80,
-            "plant_height" : 80,
-            "peashooter_sprite" : "assets/peashooter.png",
-            "peashooter_hp" : 8,
-
-            "field_pos": (260, 169),
-            "field_size" : (990-260,675-169),
-            "field_rows" : 5,
-            "field_columns" : 9,
+        game = {
+            "width": 1080,
+            "height": 700,
+            "target_fps": 60,
+        }
+        field = {
+            "x":260,
+            "y":169,
+            "width":730,
+            "height":506,
+            "rows": 5,
+            "columns": 9,
+        }
+        plant = {
+            "width": 80,
+            "height": 80,
+            "offset_x": 0,
+            "offset_y": 20,
+            "types":["peashooter"],
+            "peashooter":{
+                "hp" : 8,
+                "sprite" : "assets/peashooter.png",
+            },
+        }
+        zombie = {
+            "width":78,
+            "height" : 140,
+            "offset_x": 0,
+            "offset_y": -40,
+            "spawn_x": 1080,
+            "sprite": "assets/zombie.png",
         }
 
-    def get(self, key):
-        if key not in self._configs.keys():
-            Exception(f"{key} key is not in the config")
-        return self._configs[key]
+        self.plant = MappingProxyType(plant)
+        self.zombie = MappingProxyType(zombie)
+        self.field = MappingProxyType(field)
+        self.game = MappingProxyType(game)

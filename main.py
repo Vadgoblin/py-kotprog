@@ -4,11 +4,11 @@ from field import Field
 import spriteLoader
 from configManager import ConfigManager
 
-config = ConfigManager()
+config = ConfigManager().game
 
 pygame.init()
-X = config.get("window_width")
-Y = config.get("window_height")
+X = config["width"]
+Y = config["height"]
 
 screen = pygame.display.set_mode((X, Y))
 pygame.display.set_caption('PvZ paint edition')
@@ -27,6 +27,6 @@ while True:
     field.draw(screen)
     pygame.display.flip()
 
-    clock.tick(config.get("target_tick_time"))
+    clock.tick(config["target_fps"])
     # print(clock.get_time())
     # print(clock.get_fps())

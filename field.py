@@ -4,28 +4,28 @@ import configManager
 import plants.peashooter
 from zombie import Zombie
 
-config = configManager.ConfigManager()
+config = configManager.ConfigManager().field
 
 
 def row_to_y(row):
-    _, field_height = config.get("field_size")
-    _, field_y = config.get("field_pos")
-    field_block_height = field_height / config.get("field_rows")
+    field_height = config["height"]
+    field_y = config["y"]
+    field_block_height = field_height / config["rows"]
     y = field_y + (row * field_block_height)
     return y
 
 def col_to_x(col):
-    field_width, _ = config.get("field_size")
-    field_x, _ = config.get("field_pos")
-    field_block_width = field_width / config.get("field_columns")
+    field_width = config["height"]
+    field_x = config["x"]
+    field_block_width = field_width / config["columns"]
     x = field_x + (col * field_block_width)
     return x
 
 
 class Field:
     def __init__(self):
-        self._rows = config.get("field_rows")
-        self._columns = config.get("field_columns")
+        self._rows = config["rows"]
+        self._columns = config["columns"]
         self._zombies = []
         for _ in range(self._rows):
             self._zombies.append([])
