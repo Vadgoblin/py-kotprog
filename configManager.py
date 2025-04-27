@@ -16,11 +16,17 @@ class ConfigManager:
 
     def __init__(self):
         self._configs = {
-            "windowWidth" : 1080,
-            "windowHeight" : 700,
+            "window_width" : 1080,
+            "window_height" : 700,
+            "target_tick_time" : 60,
 
-            "zombieSize" : (78, 140),
-            "zombieSprite" : "assets/zombie.png"
+            "zombie_size" : (78, 140),
+            "zombie_sprite" : "assets/zombie.png",
+
+            "field_pos": (260, 169),
+            "field_size" : (990-260,675-169),
+            "field_rows" : 5,
+            "field_columns" : 9,
         }
 
     def get(self, key):

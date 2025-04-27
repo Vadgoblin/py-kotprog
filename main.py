@@ -1,31 +1,33 @@
 import pygame
+
+import spriteLoader
 from zombie import Zombie
 import configManager
 
 config = configManager.ConfigManager()
 
 pygame.init()
-X = config.get("windowWidth")
-Y = config.get("windowHeight")
+X = config.get("window_width")
+Y = config.get("window_height")
 
 screen = pygame.display.set_mode((X, Y))
-pygame.display.set_caption('image')
+pygame.display.set_caption('PvZ paint edition')
 
-pygame.init()
+
+bg = spriteLoader.load("assets/background.png")
 i = 0
 clock = pygame.time.Clock()
 zombie = Zombie()
 
+
 while True:
-    screen.fill((128,128,128))
+    screen.blit(bg,(0,0))
+    zombie.move()
     zombie.draw(screen)
+
     pygame.display.flip()
-    # setting fps of program to max 1 per second
-    clock.tick(1)
 
-    # printing time used in the previous tick
-    print(clock.get_time())
-
-    # printing compute the clock framerate
-    print(clock.get_fps())
+    clock.tick(config.get("target_tick_time"))
+    # print(clock.get_time())
+    # print(clock.get_fps())
     i = i + 1
