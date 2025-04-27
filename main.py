@@ -17,8 +17,8 @@ bg = spriteLoader.load("assets/background.png")
 clock = pygame.time.Clock()
 
 field = Field()
-field.spawn_zombie(4)
-field.plant_plant("peashooter",0,0)
+field._zombie_manager.spawn_zombie(4)
+field._plant_manager.plant_plant("peashooter",0,0)
 
 while True:
     field.on_tick()

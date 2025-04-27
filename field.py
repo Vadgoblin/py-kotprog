@@ -1,8 +1,6 @@
 import configManager
-# import plants.plantFactory, plants.abstractPlant
-from plants.plantFactory import plantFactory
-from plants.abstractPlant import AbstractPlant
-from zombie import Zombie
+from managers.plantManager import PlantManager
+from managers.zombieManager import ZombieManager
 
 config = configManager.ConfigManager().field
 
@@ -25,47 +23,22 @@ def col_to_x(col):
 class Field:
     def __init__(self):
         self._rows = config["rows"]
-        self._columns = config["columns"]
-        self._zombies = []
-        for _ in range(self._rows):
-            self._zombies.append([])
+        self._cols = config["columns"]
+        self._plant_manager = PlantManager(self)
+        self._zombie_manager = ZombieManager(self)
 
-        self._plants = []
-        for row in range(self._rows):
-            self._plants.append([])
-            for _ in range(self._columns):
-                self._plants[row].append(None)
+    @property
+    def rows(self):
+        return self._rows
 
-    def spawn_zombie(self, row):
-        if not isinstance(row,int) or row < 0 or row >= self._rows:
-            raise Exception(f"Expected row to be an integer between 0 and {self._rows - 1}, got {row}")
-        self._zombies[row].append(Zombie(row))
-
-    def plant_plant(self, plant_type, row, col):
-        if not isinstance(row,int) or row < 0 or row >= self._rows:
-            raise Exception(f"Expected row to be an integer between 0 and {self._rows - 1}, got {row}")
-        if not isinstance(col,int) or col < 0 or col >= self._columns:
-            raise Exception(f"Expected row to be an integer between 0 and {self._columns - 1}, got {col}")
-        if self._plants[row][col] is not None:
-            raise Exception(f"There is already a plant at row {row} column {col}")
-        self._plants[row][col] = plantFactory(plant_type, row, col)
+    @property
+    def cols(self):
+        return self._cols
 
     def draw(self, screen):
-        self._iterate_plants(AbstractPlant.draw, screen)
-        self._iterate_zombies(Zombie.draw, screen)
+        self._plant_manager.draw(screen)
+        self._zombie_manager.draw(screen)
 
     def on_tick(self):
-        self._iterate_plants(AbstractPlant.on_tick)
-        self._iterate_zombies(Zombie.on_tick)
-
-    def _iterate_plants(self, action, *args):
-        for row in range(self._rows):
-            for col in range(self._columns):
-                plant = self._plants[row][col]
-                if plant is not None:
-                    action(plant, *args)
-
-    def _iterate_zombies(self, action, *args):
-        for row in range(self._rows):
-            for zombie in self._zombies[row]:
-                action(zombie, *args)
+        self._plant_manager.on_tick()
+        self._zombie_manager.on_tick()
