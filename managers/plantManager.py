@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 class PlantManager:
     def __init__(self, field: 'Field'):
         self._field = field
-        self._plants: List[List[Optional[AbstractPlant]]] = []
+        self._plants: List[List[AbstractPlant | None]] = []
         for row in range(self._field.rows):
             self._plants.append([])
             for _ in range(self._field.cols):

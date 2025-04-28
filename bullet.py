@@ -1,19 +1,52 @@
 import field
 import spriteLoader
 import configManager
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from managers.bulletManager import BulletManager
 
 config = configManager.ConfigManager().bullet
+_despawn_x = configManager.ConfigManager().game["width"]
 
 class Bullet:
-    def __init__(self, row, col):
+    def __init__(self,bullet_manager : "BulletManager", row, col):
+        self._bullet_manager = bullet_manager
+        self._row = row
         self._x = field.col_to_x(col) + config["offset_x"]
         self._y = field.row_to_y(row) + config["offset_y"]
         self._width = config["width"]
         self._height = config["height"]
         self._sprite = spriteLoader.load(config["sprite"], (self._width, self._height))
+        self._is_alive = True
+
+    @property
+    def row(self):
+        return self._row
+
+    @property
+    def x(self):
+        return self._x
+
+    @property
+    def width(self):
+        return self._width
+
+    @property
+    def is_alive(self):
+        if not self._is_alive:
+            return False
+        if self.x > _despawn_x:
+            return False
+        return True
 
     def on_tick(self):
-        self._x += config["speed"]
+        hit_zombie = self._bullet_manager.get_zombie_hit_by_bullet(self)
+        if hit_zombie is None:
+            self._x += config["speed"]
+        else:
+            hit_zombie.suffer_damage()
+            self._is_alive = False
 
     def draw(self, screen):
         screen.blit(self._sprite, (self._x, self._y))

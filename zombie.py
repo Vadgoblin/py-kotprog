@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from managers.zombieManager import ZombieManager
     from plants.abstractPlant import AbstractPlant
+    from bullet import Bullet
 
 config = configManager.ConfigManager().zombie
 offset_x = config["offset_x"]
@@ -25,6 +26,7 @@ class Zombie:
         self._y = field.row_to_y(row)
         self._x = spawn_x
         self._width = config["width"]
+        self._hp = config["hp"]
         self._eat_timeout = 0
         self._sprite = _load_sprite()
 
@@ -43,6 +45,16 @@ class Zombie:
     @property
     def width(self):
         return self._width
+
+    @property
+    def is_alive(self):
+        return self._hp > 0
+
+    def is_hit_by_bullet(self, bullet:"Bullet"):
+        return self._x <= bullet.x + bullet.width and self._x + self._width >= bullet.x
+
+    def suffer_damage(self):
+        self._hp -= 1
 
     def draw(self, screen):
         position = (self._x + offset_x, self._y + offset_y)
