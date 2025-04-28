@@ -1,13 +1,13 @@
 from abc import ABC, abstractmethod
 
-import configManager
+from config import Config
 import field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from managers.plantManager import PlantManager
+    from plant.plantManager import PlantManager
 
-config = configManager.ConfigManager().plant
+config =  Config().plant
 
 class AbstractPlant(ABC):
     def __init__(self,plant_manager: "PlantManager", row, col,hp):

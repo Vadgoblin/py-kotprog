@@ -1,13 +1,13 @@
 import field
 import spriteLoader
-import configManager
+from config import Config
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from managers.bulletManager import BulletManager
+    from bullet.bulletManager import BulletManager
 
-config = configManager.ConfigManager().bullet
-_despawn_x = configManager.ConfigManager().game["width"]
+config = Config().bullet
+_despawn_x = Config().game["width"]
 
 class Bullet:
     def __init__(self,bullet_manager : "BulletManager", row, col):

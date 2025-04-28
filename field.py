@@ -1,9 +1,9 @@
-import configManager
-from managers.bulletManager import BulletManager
-from managers.plantManager import PlantManager
-from managers.zombieManager import ZombieManager
+from config import Config
+from bullet.bulletManager import BulletManager
+from plant.plantManager import PlantManager
+from zombie.zombieManager import ZombieManager
 
-config = configManager.ConfigManager().field
+config = Config().field
 
 
 def row_to_y(row):

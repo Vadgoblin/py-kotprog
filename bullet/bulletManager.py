@@ -1,13 +1,11 @@
-from tkinter import Listbox
-
-from bullet import Bullet
-import configManager
+from bullet.bullet import Bullet
+import config
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
     from field import Field
 
-config = configManager.ConfigManager().bullet
+config = config.Config().bullet
 
 class BulletManager:
     def __init__(self,field:"Field"):

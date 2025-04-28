@@ -1,13 +1,13 @@
-import configManager
+from config import Config
 import spriteLoader
-from plants.abstractPlant import AbstractPlant
+from plant.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from managers.plantManager import PlantManager
+    from plant.plantManager import PlantManager
 
 
-config = configManager.ConfigManager().plant
+config = Config().plant
 
 class Peashooter(AbstractPlant):
     def __init__(self,plant_manager : "PlantManager", row, col):

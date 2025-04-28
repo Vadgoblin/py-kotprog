@@ -1,10 +1,10 @@
 import field
-from zombie import Zombie
+from zombie.zombie import Zombie
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
     from field import Field
-    from plants.abstractPlant import AbstractPlant
+    from plant.abstractPlant import AbstractPlant
     from bullet import Bullet
 
 

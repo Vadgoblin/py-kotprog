@@ -1,14 +1,14 @@
 import field
 import spriteLoader
-import configManager
+from config import Config
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from managers.zombieManager import ZombieManager
-    from plants.abstractPlant import AbstractPlant
+    from zombie.zombieManager import ZombieManager
+    from plant.abstractPlant import AbstractPlant
     from bullet import Bullet
 
-config = configManager.ConfigManager().zombie
+config = Config().zombie
 offset_x = config["offset_x"]
 offset_y = config["offset_y"]
 spawn_x = config["spawn_x"]

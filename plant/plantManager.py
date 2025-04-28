@@ -1,6 +1,6 @@
 import field
-from plants.plantFactory import plantFactory
-from plants.abstractPlant import AbstractPlant
+from plant.plantFactory import plantFactory
+from plant.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING,List, Optional
 
 if TYPE_CHECKING:
