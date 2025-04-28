@@ -17,12 +17,13 @@ bg = spriteLoader.load("assets/background.png")
 clock = pygame.time.Clock()
 
 field = Field()
-field._zombie_manager.spawn_zombie(4)
-field._plant_manager.plant_plant("peashooter",0,0)
+field.zombie_manager.spawn_zombie(0)
+field.plant_manager.plant_plant("peashooter",0,0)
 
 while True:
     field.on_tick()
 
+    # print(field.zombie_manager.does_plant_see_zombie(field.plant_manager._plants[0][0]))
     screen.blit(bg, (0, 0))
     field.draw(screen)
     pygame.display.flip()

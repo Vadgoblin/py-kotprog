@@ -36,6 +36,8 @@ class ConfigManager:
             "peashooter":{
                 "hp" : 8,
                 "sprite" : "assets/peashooter.png",
+                "shoot_timeout" : 1500 / (1000/60),
+
             },
         }
         zombie = {

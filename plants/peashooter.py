@@ -1,13 +1,18 @@
 import configManager
 import spriteLoader
 from plants.abstractPlant import AbstractPlant
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from managers.plantManager import PlantManager
+
 
 config = configManager.ConfigManager().plant
 
 class Peashooter(AbstractPlant):
-    def __init__(self,row, col):
+    def __init__(self,plant_manager : "PlantManager", row, col):
         hp =  config["peashooter"]["hp"]
-        super().__init__(row,col,hp)
+        super().__init__(plant_manager, row,col,hp)
         self.shoot_timeout = 0
         self._sprite = self._get_sprite()
 
@@ -18,5 +23,9 @@ class Peashooter(AbstractPlant):
         return spriteLoader.load(sprite_path,(width,height))
 
     def on_tick(self):
-        if self.shoot_timeout == 0:
-            pass
+        if self.shoot_timeout > 0:
+            self.shoot_timeout -= 1
+            return
+        if self._plant_manager.does_plant_see_zombie(self):
+            print("shoot")
+            self.shoot_timeout = config["peashooter"]["shoot_timeout"]

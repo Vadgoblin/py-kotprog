@@ -21,17 +21,21 @@ class PlantManager:
             raise Exception(f"Expected row to be an integer between 0 and {self._field.cols - 1}, got {col}")
         if self._plants[row][col] is not None:
             raise Exception(f"There is already a plant at row {row} column {col}")
-        self._plants[row][col] = plantFactory(plant_type, row, col)
+        self._plants[row][col] = plantFactory(self, plant_type, row, col)
+
+    def does_plant_see_zombie(self, plant: "AbstractPlant"):
+        return self._field.zombie_manager.does_plant_see_zombie(plant)
 
     def draw(self, screen):
-        self._iterate_plants(AbstractPlant.draw, screen)
-
-    def on_tick(self):
-        self._iterate_plants(AbstractPlant.on_tick)
-
-    def _iterate_plants(self, action, *args):
         for row in range(self._field.rows):
             for col in range(self._field.cols):
                 plant = self._plants[row][col]
                 if plant is not None:
-                    action(plant, *args)
+                    plant.draw(screen)
+
+    def on_tick(self):
+        for row in range(self._field.rows):
+            for col in range(self._field.cols):
+                plant = self._plants[row][col]
+                if plant is not None:
+                    plant.on_tick()

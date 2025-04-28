@@ -15,17 +15,24 @@ def _load_sprite():
 
 class Zombie:
     def __init__(self, row):
-        self.row = row
-        self.y = field.row_to_y(row)
-        self.x = spawn_x
-        self.sprite = _load_sprite()
+        self._y = field.row_to_y(row)
+        self._x = spawn_x
+        self._sprite = _load_sprite()
+
+    @property
+    def x(self):
+        return self._x
+
+    @property
+    def y(self):
+        return self._y
 
     def draw(self, screen):
-        position = (self.x + offset_x, self.y + offset_y)
-        screen.blit(self.sprite, position)
+        position = (self._x + offset_x, self._y + offset_y)
+        screen.blit(self._sprite, position)
 
     def on_tick(self):
         self.move()
 
     def move(self):
-        self.x -= 1
+        self._x -= 1

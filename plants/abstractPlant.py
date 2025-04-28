@@ -1,11 +1,16 @@
 from abc import ABC, abstractmethod
 import configManager
 import field
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from managers.plantManager import PlantManager
 
 config = configManager.ConfigManager().plant
 
 class AbstractPlant(ABC):
-    def __init__(self,row, col,hp):
+    def __init__(self,plant_manager: "PlantManager", row, col,hp):
+        self._plant_manager = plant_manager
         self._row = row
         self._col = col
         self._hp = hp
@@ -25,3 +30,11 @@ class AbstractPlant(ABC):
     def suffer_damage(self):
         self._hp -= 1
         print(self._hp)
+
+    @property
+    def row(self):
+        return self._row
+
+    @property
+    def col(self):
+        return self._col

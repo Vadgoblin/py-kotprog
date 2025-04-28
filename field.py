@@ -35,6 +35,14 @@ class Field:
     def cols(self):
         return self._cols
 
+    @property
+    def plant_manager(self):
+        return self._plant_manager
+
+    @property
+    def zombie_manager(self):
+        return self._zombie_manager
+
     def draw(self, screen):
         self._plant_manager.draw(screen)
         self._zombie_manager.draw(screen)
