@@ -27,5 +27,5 @@ class Peashooter(AbstractPlant):
             self.shoot_timeout -= 1
             return
         if self._plant_manager.does_plant_see_zombie(self):
-            print("shoot")
+            self._plant_manager.spawn_bullet(self.row, self.col)
             self.shoot_timeout = config["peashooter"]["shoot_timeout"]

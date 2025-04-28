@@ -1,4 +1,5 @@
 import configManager
+from managers.bulletManager import BulletManager
 from managers.plantManager import PlantManager
 from managers.zombieManager import ZombieManager
 
@@ -6,16 +7,18 @@ config = configManager.ConfigManager().field
 
 
 def row_to_y(row):
-    field_height = config["height"]
     field_y = config["y"]
-    field_block_height = field_height / config["rows"]
+    field_height = config["height"]
+    field_rows = config["rows"]
+    field_block_height = field_height / field_rows
     y = field_y + (row * field_block_height)
     return y
 
 def col_to_x(col):
-    field_width = config["height"]
     field_x = config["x"]
-    field_block_width = field_width / config["columns"]
+    field_width = config["width"]
+    field_cols =  config["columns"]
+    field_block_width = field_width /field_cols
     x = field_x + (col * field_block_width)
     return x
 
@@ -26,6 +29,7 @@ class Field:
         self._cols = config["columns"]
         self._plant_manager = PlantManager(self)
         self._zombie_manager = ZombieManager(self)
+        self._bullet_manager = BulletManager(self)
 
     @property
     def rows(self):
@@ -43,10 +47,16 @@ class Field:
     def zombie_manager(self):
         return self._zombie_manager
 
+    @property
+    def bullet_manager(self):
+        return self._bullet_manager
+
     def draw(self, screen):
         self._plant_manager.draw(screen)
         self._zombie_manager.draw(screen)
+        self._bullet_manager.draw(screen)
 
     def on_tick(self):
         self._plant_manager.on_tick()
         self._zombie_manager.on_tick()
+        self._bullet_manager.on_tick()

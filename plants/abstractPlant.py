@@ -1,4 +1,7 @@
 from abc import ABC, abstractmethod
+
+import pygame
+
 import configManager
 import field
 from typing import TYPE_CHECKING
@@ -25,6 +28,7 @@ class AbstractPlant(ABC):
     def draw(self, screen):
         x = field.col_to_x(self._col) + self._offset_x
         y = field.row_to_y(self._row) + self._offset_y
+        # print(x,y)
         screen.blit(self._sprite, (x,y))
 
     def suffer_damage(self):

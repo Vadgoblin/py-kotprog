@@ -26,6 +26,10 @@ class PlantManager:
     def does_plant_see_zombie(self, plant: "AbstractPlant"):
         return self._field.zombie_manager.does_plant_see_zombie(plant)
 
+    def spawn_bullet(self,row, col):
+        self._field.bullet_manager.spawn_bullet(row,col)
+
+
     def draw(self, screen):
         for row in range(self._field.rows):
             for col in range(self._field.cols):

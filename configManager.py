@@ -32,13 +32,21 @@ class ConfigManager:
             "width": 80,
             "height": 80,
             "offset_x": 0,
-            "offset_y": 20,
+            "offset_y": 10,
             "peashooter":{
                 "hp" : 8,
                 "sprite" : "assets/peashooter.png",
-                "shoot_timeout" : 1500 / (1000/60),
+                "shoot_timeout" : 150 #/ (1000/60),
 
             },
+        }
+        bullet = {
+            "width": 25,
+            "height": 25,
+            "sprite": "assets/pea.png",
+            "offset_x" : 63,
+            "offset_y" : 17,
+            "speed" : 3,
         }
         zombie = {
             "width":78,
@@ -52,4 +60,5 @@ class ConfigManager:
         self.plant = MappingProxyType(plant)
         self.zombie = MappingProxyType(zombie)
         self.field = MappingProxyType(field)
+        self.bullet = MappingProxyType(bullet)
         self.game = MappingProxyType(game)

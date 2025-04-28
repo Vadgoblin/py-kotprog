@@ -1,6 +1,8 @@
 import pygame
 
 from field import Field
+
+import field
 import spriteLoader
 from configManager import ConfigManager
 
@@ -16,16 +18,29 @@ pygame.display.set_caption('PvZ paint edition')
 bg = spriteLoader.load("assets/background.png")
 clock = pygame.time.Clock()
 
-field = Field()
-field.zombie_manager.spawn_zombie(0)
-field.plant_manager.plant_plant("peashooter",0,0)
+f = Field()
+f.zombie_manager.spawn_zombie(0)
+f.zombie_manager.spawn_zombie(1)
+f.zombie_manager.spawn_zombie(2)
+f.zombie_manager.spawn_zombie(3)
+f.zombie_manager.spawn_zombie(4)
+
+for i in range(9):
+    for j in range(5):
+        f.plant_manager.plant_plant("peashooter",j,i)
+# f.plant_manager.plant_plant("peashooter", 4, 5)
+fc = ConfigManager().field
+
+
 
 while True:
-    field.on_tick()
+    f.on_tick()
 
     # print(field.zombie_manager.does_plant_see_zombie(field.plant_manager._plants[0][0]))
     screen.blit(bg, (0, 0))
-    field.draw(screen)
+    f.draw(screen)
+
+
     pygame.display.flip()
 
     clock.tick(config["target_fps"])
