@@ -16,7 +16,7 @@ class ZombieManager:
     def spawn_zombie(self, row):
         if not isinstance(row,int) or row < 0 or row >= self._field.rows:
             raise Exception(f"Expected row to be an integer between 0 and {self._field.rows - 1}, got {row}")
-        self._zombies[row].append(Zombie(row))
+        self._zombies[row].append(Zombie(self, row))
 
     def does_plant_see_zombie(self, plant:"AbstractPlant"):
         row = plant.row
@@ -26,6 +26,13 @@ class ZombieManager:
             if x <= zombie.x:
                 return True
         return False
+
+    def is_zombie_blocked(self, zombie: "Zombie"):
+        return self.get_blocking_plant(zombie) is not None
+
+    def get_blocking_plant(self, zombie: "Zombie"):
+        return self._field.plant_manager.get_blocking_plant(zombie)
+
 
     def draw(self, screen):
         self._iterate_zombies(Zombie.draw, screen)

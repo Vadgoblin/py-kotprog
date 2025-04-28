@@ -55,6 +55,7 @@ class ConfigManager:
             "offset_y": -40,
             "spawn_x": 1080,
             "sprite": "assets/zombie.png",
+            "eat_timeout": 500/(1000/60)
         }
 
         self.plant = MappingProxyType(plant)

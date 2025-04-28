@@ -1,6 +1,11 @@
 import field
 import spriteLoader
 import configManager
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from managers.zombieManager import ZombieManager
+    from plants.abstractPlant import AbstractPlant
 
 config = configManager.ConfigManager().zombie
 offset_x = config["offset_x"]
@@ -14,9 +19,13 @@ def _load_sprite():
 
 
 class Zombie:
-    def __init__(self, row):
+    def __init__(self,zombie_manager : "ZombieManager", row):
+        self._zombie_manager = zombie_manager
+        self._row = row
         self._y = field.row_to_y(row)
         self._x = spawn_x
+        self._width = config["width"]
+        self._eat_timeout = 0
         self._sprite = _load_sprite()
 
     @property
@@ -27,12 +36,31 @@ class Zombie:
     def y(self):
         return self._y
 
+    @property
+    def row(self):
+        return self._row
+
+    @property
+    def width(self):
+        return self._width
+
     def draw(self, screen):
         position = (self._x + offset_x, self._y + offset_y)
         screen.blit(self._sprite, position)
 
     def on_tick(self):
-        self.move()
+        blocking_plant = self._zombie_manager.get_blocking_plant(self)
+        if blocking_plant is not None:
+            self._eat(blocking_plant)
+        else:
+            self._move()
 
-    def move(self):
+    def _move(self):
         self._x -= 1
+
+    def _eat(self, plant: "AbstractPlant"):
+        if self._eat_timeout > 0:
+            self._eat_timeout -= 1
+        else:
+            plant.suffer_damage()
+            self._eat_timeout = config["eat_timeout"]

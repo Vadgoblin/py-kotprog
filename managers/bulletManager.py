@@ -1,4 +1,4 @@
-import bullet
+from bullet import Bullet
 import configManager
 from typing import TYPE_CHECKING
 
@@ -15,7 +15,7 @@ class BulletManager:
             self._bullets.append([])
 
     def spawn_bullet(self, row, col):
-        self._bullets[0].append(bullet.Bullet(row, col))
+        self._bullets[0].append(Bullet(row, col))
 
     def on_tick(self):
         for row in range(self._field.rows):

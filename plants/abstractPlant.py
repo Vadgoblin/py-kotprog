@@ -1,7 +1,5 @@
 from abc import ABC, abstractmethod
 
-import pygame
-
 import configManager
 import field
 from typing import TYPE_CHECKING
@@ -18,8 +16,17 @@ class AbstractPlant(ABC):
         self._col = col
         self._hp = hp
         self._sprite = None
+        self._width = config["width"]
         self._offset_x = config["offset_x"]
         self._offset_y = config["offset_y"]
+
+    @property
+    def is_alive(self):
+        return self._hp > 0
+
+    @property
+    def width(self):
+        return self._width
 
     @abstractmethod
     def on_tick(self):
@@ -28,12 +35,10 @@ class AbstractPlant(ABC):
     def draw(self, screen):
         x = field.col_to_x(self._col) + self._offset_x
         y = field.row_to_y(self._row) + self._offset_y
-        # print(x,y)
         screen.blit(self._sprite, (x,y))
 
     def suffer_damage(self):
         self._hp -= 1
-        print(self._hp)
 
     @property
     def row(self):
