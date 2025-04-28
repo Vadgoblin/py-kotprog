@@ -1,5 +1,6 @@
 import pygame
 
+import plantSelector
 from field import Field
 
 import field
@@ -9,6 +10,7 @@ from config import Config
 config = Config().game
 
 pygame.init()
+pygame.font.init()
 X = config["width"]
 Y = config["height"]
 
@@ -31,7 +33,7 @@ for i in range(9):
 # f.plant_manager.plant_plant("peashooter", 4, 5)
 fc = Config().field
 
-
+ps = plantSelector.PlantSelector()
 
 while True:
     f.on_tick()
@@ -40,7 +42,7 @@ while True:
     screen.blit(bg, (0, 0))
     f.draw(screen)
 
-
+    ps.draw(screen)
     pygame.display.flip()
 
     clock.tick(config["target_fps"])

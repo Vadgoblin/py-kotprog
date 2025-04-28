@@ -19,6 +19,7 @@ class Config:
             "width": 1080,
             "height": 700,
             "target_fps": 60,
+            "font": "assets/font.ttf"
         }
         field = {
             "x":260,
@@ -33,12 +34,25 @@ class Config:
             "height": 80,
             "offset_x": 0,
             "offset_y": 10,
+            "types": ["peashooter","sunflower"],
+            "sun" : {
+                "sprite":"assets/sun.png",
+                "width" : 78,
+                "height" : 78,
+            },
             "peashooter":{
                 "hp" : 8,
                 "sprite" : "assets/peashooter.png",
-                "shoot_timeout" : 150 #/ (1000/60),
-
+                "shoot_timeout" : 150, #/ (1000/60),
+                "cost" : 50,
+                "recharge_time" : 7.5 * 1000/60
             },
+            "sunflower":{
+                "hp": 8,
+                "sprite": "assets/sunflower.png",
+                "cost": 100,
+                "recharge_time": 7.5 * 1000 / 60
+            }
         }
         bullet = {
             "width": 25,
