@@ -33,16 +33,21 @@ for i in range(9):
 # f.plant_manager.plant_plant("peashooter", 4, 5)
 fc = Config().field
 
-ps = plantSelector.PlantSelector()
 
 while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEMOTION:
+            f.on_event(event)
+
+
     f.on_tick()
 
     # print(field.zombie_manager.does_plant_see_zombie(field.plant_manager._plants[0][0]))
     screen.blit(bg, (0, 0))
     f.draw(screen)
 
-    ps.draw(screen)
     pygame.display.flip()
 
     clock.tick(config["target_fps"])

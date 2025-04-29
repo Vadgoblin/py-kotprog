@@ -25,6 +25,7 @@ class PlantSelector:
         self._width = 500
         self._height = 119
 
+        self._selected_plant_index = None
         self._sun_count = 50
         self._screen = None
         self._plants = _load_plants()
@@ -46,6 +47,12 @@ class PlantSelector:
             sprite_path = plant["sprite_path"]
             sprite = spriteLoader.load(sprite_path, (60,60))
             plant["sprite"] = sprite
+
+    @property
+    def selected_plant(self):
+        if self._selected_plant_index is None:
+            return None
+        return self._plants[self._selected_plant_index]["type"]
 
     def draw(self, screen):
         self._screen = screen
@@ -78,11 +85,46 @@ class PlantSelector:
 
         x = self._x + index * 80 + 96
         pygame.draw.rect(self._screen,(173,192,148),(x + 2,self._y + 15,65,71))
-        pygame.draw.rect(self._screen,"white",(x + 2,self._y + 86,65,17))
-        pygame.draw.rect(self._screen, "black", (x, self._y + 12, 69, 95),3,7)
+        pygame.draw.rect(self._screen,"white",(x + 2,self._y + 86,65,18))
+
+        color = "white" if index==self._selected_plant_index else "black"
+        pygame.draw.rect(self._screen, color, (x, self._y + 12, 69, 95),3,7)
 
         cost = str(plant["cost"])
         cost_text = self._font.render(cost,1,"black")
         cost_offset = cost_text.get_width() / 2
         self._screen.blit(cost_text,(x + 35 - cost_offset, self._y + 86))
         self._screen.blit(plant["sprite"],(x + 4, self._y + 20))
+
+
+    def on_event(self, event: "pygame.event.Event"):
+        if event.type != pygame.MOUSEBUTTONDOWN:
+            return False
+
+        click_pos = event.dict["pos"]
+        click_x, click_y = click_pos
+        if click_x < self._x or click_y < self._y:
+            return False
+        if click_y > self._y + self._height or click_x > self._x + self._width:
+            return False
+
+        clicked_plant_index = self._get_clicked_plant_index(click_pos)
+        if clicked_plant_index is None:
+            return True
+
+        if self._selected_plant_index == clicked_plant_index:
+            self._selected_plant_index = None
+        else:
+            self._selected_plant_index = clicked_plant_index
+
+        return True
+
+
+    def _get_clicked_plant_index(self, click_pos):
+        input_x, input_y = click_pos
+        for index in range(len(self._plants)):
+            x = self._x + index * 80 + 96
+            if x + 2 <= input_x <= x + 67 and self._y + 15 <= input_y <= self._y + 86:
+                return index
+
+        return None

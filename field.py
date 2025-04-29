@@ -1,7 +1,12 @@
 from config import Config
 from bullet.bulletManager import BulletManager
 from plant.plantManager import PlantManager
+from plantSelector import PlantSelector
 from zombie.zombieManager import ZombieManager
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import pygame
 
 config = Config().field
 
@@ -30,6 +35,7 @@ class Field:
         self._plant_manager = PlantManager(self)
         self._zombie_manager = ZombieManager(self)
         self._bullet_manager = BulletManager(self)
+        self._plant_selector = PlantSelector()
 
     @property
     def rows(self):
@@ -55,8 +61,12 @@ class Field:
         self._plant_manager.draw(screen)
         self._zombie_manager.draw(screen)
         self._bullet_manager.draw(screen)
+        self._plant_selector.draw(screen)
 
     def on_tick(self):
         self._plant_manager.on_tick()
         self._zombie_manager.on_tick()
         self._bullet_manager.on_tick()
+
+    def on_event(self, event : "pygame.event.Event"):
+        if self._plant_selector.on_event(event): return
