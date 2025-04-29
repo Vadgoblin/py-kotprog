@@ -3,6 +3,7 @@ import pygame
 import spriteLoader
 from config import Config
 from typing import TYPE_CHECKING
+from plant.ghostPlantManager import GhostPlantManager
 
 if TYPE_CHECKING:
     from game import Game
@@ -37,6 +38,7 @@ class Field:
         self._rows = config["rows"]
         self._cols = config["columns"]
         self._background = _get_sprite()
+        self._ghost_plant_manager = GhostPlantManager()
 
 
     @property
@@ -50,15 +52,19 @@ class Field:
 
     def draw(self, screen):
         screen.blit(self._background, (0, 0))
+        self._ghost_plant_manager.draw(screen)
 
 
     def on_event(self, event : "pygame.event.Event"):
         mouse_pos = self._get_mouse_pos(event)
         if mouse_pos is None:
+            self._ghost_plant_manager.hide()
             return False
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             self._plant_plant(mouse_pos)
+        elif event.type == pygame.MOUSEMOTION:
+            self._ghost_plant(mouse_pos)
 
     def _get_mouse_pos(self, event: "pygame.event.Event"):
         width = config["width"]
@@ -87,9 +93,19 @@ class Field:
 
     def _plant_plant(self, mouse_pos):
         selected_plant = self._game.plant_selector.selected_plant
-        if selected_plant is not None:
-            if self._game.plant_manager.is_space_empty(*mouse_pos):
-                self._game.plant_manager.plant_plant(selected_plant, *mouse_pos)
+        if selected_plant is None:
+            return
+        if not self._game.plant_manager.is_space_empty(*mouse_pos):
+            return
+        self._game.plant_manager.plant_plant(selected_plant, *mouse_pos)
+        self._ghost_plant_manager.hide()
 
     def _ghost_plant(self, mouse_pos):
-        pass
+        selected_plant = self._game.plant_selector.selected_plant
+        if selected_plant is None:
+            self._ghost_plant_manager.hide()
+            return
+        if not self._game.plant_manager.is_space_empty(*mouse_pos):
+            self._ghost_plant_manager.hide()
+            return
+        self._ghost_plant_manager.show(selected_plant, *mouse_pos)
