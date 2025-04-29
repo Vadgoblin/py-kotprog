@@ -1,5 +1,5 @@
 import field
-from plant.plantFactory import plantFactory
+from plant.plantFactory import plant_factory
 from plant.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING,List, Optional
 
@@ -23,7 +23,7 @@ class PlantManager:
             raise Exception(f"Expected row to be an integer between 0 and {self._field.cols - 1}, got {col}")
         if self._plants[row][col] is not None:
             raise Exception(f"There is already a plant at row {row} column {col}")
-        self._plants[row][col] = plantFactory(self, plant_type, row, col)
+        self._plants[row][col] = plant_factory(self, plant_type, row, col)
 
     def does_plant_see_zombie(self, plant: "AbstractPlant"):
         return self._field.zombie_manager.does_plant_see_zombie(plant)

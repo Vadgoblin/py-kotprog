@@ -72,7 +72,7 @@ class Field:
 
     def on_event(self, event : "pygame.event.Event"):
         if self._plant_selector.on_event(event): return
-        print(self._get_mouse_pos(event))
+        # print(self._get_mouse_pos(event))
 
     def _get_mouse_pos(self, event: "pygame.event.Event"):
         width = config["width"]

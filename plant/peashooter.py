@@ -9,18 +9,20 @@ if TYPE_CHECKING:
 
 config = Config().plant
 
+
+def _get_sprite():
+    sprite_path = config["peashooter"]["sprite"]
+    width = config["width"]
+    height = config["height"]
+    return spriteLoader.load(sprite_path,(width,height))
+
+
 class Peashooter(AbstractPlant):
     def __init__(self,plant_manager : "PlantManager", row, col):
         hp =  config["peashooter"]["hp"]
         super().__init__(plant_manager, row,col,hp)
         self.shoot_timeout = 0
-        self._sprite = self._get_sprite()
-
-    def _get_sprite(self):
-        sprite_path = config["peashooter"]["sprite"]
-        width = config["width"]
-        height = config["height"]
-        return spriteLoader.load(sprite_path,(width,height))
+        self._sprite = _get_sprite()
 
     def on_tick(self):
         if self.shoot_timeout > 0:

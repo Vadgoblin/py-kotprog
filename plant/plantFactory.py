@@ -1,9 +1,12 @@
-import plant.peashooter
+from plant.peashooter import Peashooter
+from plant.sunflower import Sunflower
 
 
-def plantFactory(plant_manager, plant_type, row, col):
+def plant_factory(plant_manager, plant_type, row, col):
     if plant_type == "peashooter":
-        return plant.peashooter.Peashooter(plant_manager, row, col)
+        return Peashooter(plant_manager, row, col)
+    if plant_type == "sunflower":
+        return Sunflower(plant_manager, row, col)
 
     else:
         raise Exception(f"\"{plant_type}\" is an invalid plant type")

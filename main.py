@@ -25,8 +25,7 @@ f.zombie_manager.spawn_zombie(4)
 
 for i in range(9):
     for j in range(5):
-        f.plant_manager.plant_plant("peashooter",j,i)
-# f.plant_manager.plant_plant("peashooter", 4, 5)
+        f.plant_manager.plant_plant("sunflower",j,i)
 fc = Config().field
 
 
