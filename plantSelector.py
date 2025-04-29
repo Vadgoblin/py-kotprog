@@ -124,7 +124,7 @@ class PlantSelector:
         input_x, input_y = click_pos
         for index in range(len(self._plants)):
             x = self._x + index * 80 + 96
-            if x + 2 <= input_x <= x + 67 and self._y + 15 <= input_y <= self._y + 86:
+            if x + 2 <= input_x <= x + 67 and self._y + 15 <= input_y <= self._y + 103:
                 return index
 
         return None

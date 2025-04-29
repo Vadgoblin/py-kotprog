@@ -60,8 +60,6 @@ class Field:
         if event.type == pygame.MOUSEBUTTONDOWN:
             self._plant_plant(mouse_pos)
 
-
-
     def _get_mouse_pos(self, event: "pygame.event.Event"):
         width = config["width"]
         height = config["height"]
