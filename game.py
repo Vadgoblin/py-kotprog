@@ -10,12 +10,11 @@ if TYPE_CHECKING:
 
 class Game:
     def __init__(self):
-        self._field = Field()
+        self._field = Field(self)
         self._plant_manager = PlantManager(self)
         self._zombie_manager = ZombieManager(self)
         self._bullet_manager = BulletManager(self)
         self._plant_selector = PlantSelector()
-
 
     @property
     def field(self):
@@ -33,6 +32,10 @@ class Game:
     def bullet_manager(self):
         return self._bullet_manager
 
+    @property
+    def plant_selector(self):
+        return self._plant_selector
+
     def draw(self, screen):
         self._field.draw(screen)
         self._plant_manager.draw(screen)
@@ -47,3 +50,4 @@ class Game:
 
     def on_event(self, event : "pygame.event.Event"):
         if self._plant_selector.on_event(event): return
+        self._field.on_event(event)

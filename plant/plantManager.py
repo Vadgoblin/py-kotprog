@@ -38,6 +38,9 @@ class PlantManager:
                 return plant
         return None
 
+    def is_space_empty(self, row, col):
+        return self._plants[row][col] is None
+
     def spawn_bullet(self,row, col):
         self._game.bullet_manager.spawn_bullet(row,col)
 

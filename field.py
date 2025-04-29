@@ -1,11 +1,11 @@
 from math import floor
-
+import pygame
 import spriteLoader
 from config import Config
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    import pygame
+    from game import Game
 
 config = Config().field
 
@@ -32,7 +32,8 @@ def col_to_x(col):
 
 
 class Field:
-    def __init__(self):
+    def __init__(self, game :"Game"):
+        self._game = game
         self._rows = config["rows"]
         self._cols = config["columns"]
         self._background = _get_sprite()
@@ -50,12 +51,16 @@ class Field:
     def draw(self, screen):
         screen.blit(self._background, (0, 0))
 
-    def on_tick(self):
-        pass
 
     def on_event(self, event : "pygame.event.Event"):
-        pass
-        # print(self._get_mouse_pos(event))
+        mouse_pos = self._get_mouse_pos(event)
+        if mouse_pos is None:
+            return False
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            self._plant_plant(mouse_pos)
+
+
 
     def _get_mouse_pos(self, event: "pygame.event.Event"):
         width = config["width"]
@@ -80,4 +85,13 @@ class Field:
         col = floor(click_x / block_width)
         row = floor(click_y / block_height)
 
-        return (col,row)
+        return (row,col)
+
+    def _plant_plant(self, mouse_pos):
+        selected_plant = self._game.plant_selector.selected_plant
+        if selected_plant is not None:
+            if self._game.plant_manager.is_space_empty(*mouse_pos):
+                self._game.plant_manager.plant_plant(selected_plant, *mouse_pos)
+
+    def _ghost_plant(self, mouse_pos):
+        pass
