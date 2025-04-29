@@ -1,16 +1,17 @@
 from math import floor
 
+import spriteLoader
 from config import Config
-from bullet.bulletManager import BulletManager
-from plant.plantManager import PlantManager
-from plantSelector import PlantSelector
-from zombie.zombieManager import ZombieManager
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     import pygame
 
 config = Config().field
+
+def _get_sprite():
+    sprite_path = Config().game["background"]
+    return spriteLoader.load(sprite_path)
 
 
 def row_to_y(row):
@@ -34,10 +35,8 @@ class Field:
     def __init__(self):
         self._rows = config["rows"]
         self._cols = config["columns"]
-        self._plant_manager = PlantManager(self)
-        self._zombie_manager = ZombieManager(self)
-        self._bullet_manager = BulletManager(self)
-        self._plant_selector = PlantSelector()
+        self._background = _get_sprite()
+
 
     @property
     def rows(self):
@@ -47,31 +46,15 @@ class Field:
     def cols(self):
         return self._cols
 
-    @property
-    def plant_manager(self):
-        return self._plant_manager
-
-    @property
-    def zombie_manager(self):
-        return self._zombie_manager
-
-    @property
-    def bullet_manager(self):
-        return self._bullet_manager
 
     def draw(self, screen):
-        self._plant_manager.draw(screen)
-        self._zombie_manager.draw(screen)
-        self._bullet_manager.draw(screen)
-        self._plant_selector.draw(screen)
+        screen.blit(self._background, (0, 0))
 
     def on_tick(self):
-        self._plant_manager.on_tick()
-        self._zombie_manager.on_tick()
-        self._bullet_manager.on_tick()
+        pass
 
     def on_event(self, event : "pygame.event.Event"):
-        if self._plant_selector.on_event(event): return
+        pass
         # print(self._get_mouse_pos(event))
 
     def _get_mouse_pos(self, event: "pygame.event.Event"):

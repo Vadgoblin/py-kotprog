@@ -19,7 +19,8 @@ class Config:
             "width": 1080,
             "height": 700,
             "target_fps": 60,
-            "font": "assets/font.ttf"
+            "font": "assets/font.ttf",
+            "background": "assets/background.png",
         }
         field = {
             "x":260,

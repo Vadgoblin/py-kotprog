@@ -2,6 +2,7 @@ import pygame
 from field import Field
 import spriteLoader
 from config import Config
+from game import Game
 
 config = Config().game
 
@@ -16,16 +17,16 @@ pygame.display.set_caption('PvZ paint edition')
 bg = spriteLoader.load("assets/background.png")
 clock = pygame.time.Clock()
 
-f = Field()
-f.zombie_manager.spawn_zombie(0)
-f.zombie_manager.spawn_zombie(1)
-f.zombie_manager.spawn_zombie(2)
-f.zombie_manager.spawn_zombie(3)
-f.zombie_manager.spawn_zombie(4)
+game = Game()
+game.zombie_manager.spawn_zombie(0)
+game.zombie_manager.spawn_zombie(1)
+game.zombie_manager.spawn_zombie(2)
+game.zombie_manager.spawn_zombie(3)
+game.zombie_manager.spawn_zombie(4)
 
 for i in range(9):
     for j in range(5):
-        f.plant_manager.plant_plant("sunflower",j,i)
+        game.plant_manager.plant_plant("peashooter",j,i)
 fc = Config().field
 
 
@@ -34,14 +35,14 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
         if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEMOTION:
-            f.on_event(event)
+            game.on_event(event)
 
 
-    f.on_tick()
+    game.on_tick()
 
     # print(field.zombie_manager.does_plant_see_zombie(field.plant_manager._plants[0][0]))
-    screen.blit(bg, (0, 0))
-    f.draw(screen)
+
+    game.draw(screen)
 
     pygame.display.flip()
 
