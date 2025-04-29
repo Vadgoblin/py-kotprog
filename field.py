@@ -1,3 +1,5 @@
+from math import floor
+
 from config import Config
 from bullet.bulletManager import BulletManager
 from plant.plantManager import PlantManager
@@ -70,3 +72,29 @@ class Field:
 
     def on_event(self, event : "pygame.event.Event"):
         if self._plant_selector.on_event(event): return
+        print(self._get_mouse_pos(event))
+
+    def _get_mouse_pos(self, event: "pygame.event.Event"):
+        width = config["width"]
+        height = config["height"]
+        x = config["x"]
+        y = config["y"]
+
+        click_pos = event.dict["pos"]
+        click_x, click_y = click_pos
+
+        click_x -= x
+        click_y -= y
+
+        if click_x < 0 or click_y < 0 or click_x > width or click_y > height:
+            return None
+
+        block_width = width / self._cols
+        block_height = height / self._rows
+
+
+
+        col = floor(click_x / block_width)
+        row = floor(click_y / block_height)
+
+        return (col,row)

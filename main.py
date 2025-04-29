@@ -1,9 +1,5 @@
 import pygame
-
-import plantSelector
 from field import Field
-
-import field
 import spriteLoader
 from config import Config
 
