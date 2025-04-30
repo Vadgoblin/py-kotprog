@@ -25,7 +25,6 @@ game.zombie_manager.spawn_zombie(3)
 game.zombie_manager.spawn_zombie(4)
 
 fc = Config().field
-game.sun_manager.spawn_sun(0,0)
 
 while True:
     for event in pygame.event.get():

@@ -8,17 +8,19 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from game import Game
 
-config = Config().sun
+field_config = Config().field
+sun_config = Config().sun
 rnd = random.Random()
 
 class SunManager:
     def __init__(self, game: "Game"):
         self._game = game
         self._suns = []
-        self._collect_speed = config["collect_speed"]
-        self._sky_fall_speed = config["sky_fall_speed"]
-        self._sky_fall_interval = config["sky_fall_interval"]
-        self._sunflower_max_random_distance = config["sunflower_max_random_distance"]
+        self._sky_sun_timeout = sun_config["sky_fall_interval"] / 2
+        self._collect_speed = sun_config["collect_speed"]
+        self._sky_fall_speed = sun_config["sky_fall_speed"]
+        self._sky_fall_interval = sun_config["sky_fall_interval"]
+        self._sunflower_max_random_distance = sun_config["sunflower_max_random_distance"]
 
     def spawn_sun(self,row, col):
         d = self._sunflower_max_random_distance
@@ -32,6 +34,33 @@ class SunManager:
             sun.draw(screen)
 
     def on_tick(self):
+        self._sky_sun_spawner()
+        self._sun_tick()
+
+    def _sky_sun_spawner(self):
+        if self._sky_sun_timeout > 0:
+            self._sky_sun_timeout -= 1
+            return
+
+        self._spawn_sky_sun()
+        self._sky_sun_timeout = self._sky_fall_interval
+
+    def _spawn_sky_sun(self):
+        field_x = field_config["x"]
+        field_y = field_config["y"]
+        field_width = field_config["width"]
+        field_height = field_config["height"]
+
+        target_x = rnd.randint(int(field_x * 1.2), int((field_x + field_width) * 0.9))
+        target_y = rnd.randint(int(field_y * 1.2), int((field_y + field_height) * 0.8))
+        start_x = target_x
+        start_y = field_y / 3
+
+        sun = Sun(start_x,start_y)
+        sun.animate(target_x,target_y,self._sky_fall_speed)
+        self._suns.append(sun)
+
+    def _sun_tick(self):
         for sun in self._suns:
             sun.on_tick()
             if not sun.is_alive:

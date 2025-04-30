@@ -34,9 +34,9 @@ class Config:
             "sprite": "assets/sun.png",
             "width": 78,
             "height": 78,
-            "collect_speed": 10,
-            "sky_fall_speed": 4,
-            "sky_fall_interval": 14000 * 1000 / 60,
+            "collect_speed": 20,
+            "sky_fall_speed": 1,
+            "sky_fall_interval": 14000 / 16,
             "sunflower_max_random_distance" : 25
         }
         plant = {
