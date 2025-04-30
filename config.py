@@ -34,9 +34,11 @@ class Config:
             "sprite": "assets/sun.png",
             "width": 78,
             "height": 78,
+            "lifespan" : 13000/16,
             "collect_speed": 20,
             "sky_fall_speed": 1,
-            "sky_fall_interval": 14000 / 16,
+            "sky_fall_interval_min": 5000 / 16,
+            "sky_fall_interval_max": 17000 / 16,
             "sunflower_max_random_distance" : 25
         }
         plant = {
@@ -50,13 +52,14 @@ class Config:
                 "sprite" : "assets/peashooter.png",
                 "shoot_timeout" : 150, #/ (1000/60),
                 "cost" : 50,
-                "recharge_time" : 7.5 * 1000/60
+                "recharge_time" : 7.5 * 1000/16
             },
             "sunflower":{
                 "hp": 8,
                 "sprite": "assets/sunflower.png",
                 "cost": 100,
-                "recharge_time": 7.5 * 1000 / 60
+                "recharge_time": 7.500 / 16,
+                "sun_spawn_interval" : 14000/16
             }
         }
         bullet = {

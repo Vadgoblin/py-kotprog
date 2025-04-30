@@ -1,6 +1,10 @@
 import pygame
 from config import Config
 import spriteLoader
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from game import Game
 
 plant_config = Config().plant
 sun_config = Config().sun
@@ -19,14 +23,14 @@ def _load_plants():
 
 
 class PlantSelector:
-    def __init__(self, x = 240, y = 0):
+    def __init__(self,game : "Game", x = 240, y = 0):
         self._x = x
         self._y = y
         self._width = 500
         self._height = 119
+        self._game = game
 
         self._selected_plant_index = None
-        self._sun_count = 50
         self._screen = None
         self._plants = _load_plants()
         self._load_sprites()
@@ -76,7 +80,7 @@ class PlantSelector:
         pygame.draw.rect(self._screen, (236,237,179), (self._x + 10, self._y + 85, 68, 20), border_radius=8)
 
     def _draw_sun_count(self):
-        count = str(self._sun_count)
+        count = str(self._game.sun_manager.sun_amount)
         text = self._font.render(count,True,"black")
         offset = text.get_width() / 2
         self._screen.blit(text, (self._x + 45 - offset, self._y + 86))

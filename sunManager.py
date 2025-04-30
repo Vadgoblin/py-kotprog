@@ -12,14 +12,19 @@ field_config = Config().field
 sun_config = Config().sun
 rnd = random.Random()
 
+
+def _get_next_sky_sun_timeout():
+    return rnd.randint(int(sun_config["sky_fall_interval_min"]), int(sun_config["sky_fall_interval_max"]))
+
+
 class SunManager:
     def __init__(self, game: "Game"):
         self._game = game
+        self._collected_amount = 50
         self._suns = []
-        self._sky_sun_timeout = sun_config["sky_fall_interval"] / 2
+        self._sky_sun_timeout = _get_next_sky_sun_timeout() / 2
         self._collect_speed = sun_config["collect_speed"]
         self._sky_fall_speed = sun_config["sky_fall_speed"]
-        self._sky_fall_interval = sun_config["sky_fall_interval"]
         self._sunflower_max_random_distance = sun_config["sunflower_max_random_distance"]
 
     def spawn_sun(self,row, col):
@@ -43,7 +48,7 @@ class SunManager:
             return
 
         self._spawn_sky_sun()
-        self._sky_sun_timeout = self._sky_fall_interval
+        self._sky_sun_timeout = _get_next_sky_sun_timeout()
 
     def _spawn_sky_sun(self):
         field_x = field_config["x"]
@@ -66,6 +71,16 @@ class SunManager:
             if not sun.is_alive:
                 self._suns.remove(sun)
 
+    def _increase_collected_amount(self, amount):
+        self._collected_amount += amount
+
+    def decrease_collected_amount(self, amount):
+        self._collected_amount -= 50
+
+    @property
+    def sun_amount(self):
+        return self._collected_amount
+
     def on_event(self, event: "pygame.event.Event"):
         if event.type != pygame.MOUSEBUTTONDOWN:
             return False
@@ -78,3 +93,4 @@ class SunManager:
     def _collect_sun(self, sun : "Sun"):
         collected_sun_pos = self._game.plant_selector.sun_position
         sun.animate_and_die(*collected_sun_pos, animation_speed=self._collect_speed)
+        self._increase_collected_amount(25)

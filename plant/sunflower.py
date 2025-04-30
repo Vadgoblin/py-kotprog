@@ -21,8 +21,13 @@ class Sunflower(AbstractPlant):
     def __init__(self, plant_manager: "PlantManager", row, col):
         hp = config["sunflower"]["hp"]
         super().__init__(plant_manager, row, col, hp)
-        self.sun_timeout = 0
+        self.sun_timeout = config["sunflower"]["sun_spawn_interval"] / 2
         self._sprite = _get_sprite()
 
     def on_tick(self):
-        pass
+        if self.sun_timeout > 0:
+            self.sun_timeout -= 1
+            return
+
+        self._plant_manager.spawn_sun(self._row, self._col)
+        self.sun_timeout = config["sunflower"]["sun_spawn_interval"]

@@ -15,7 +15,7 @@ class Game:
         self._plant_manager = PlantManager(self)
         self._zombie_manager = ZombieManager(self)
         self._bullet_manager = BulletManager(self)
-        self._plant_selector = PlantSelector()
+        self._plant_selector = PlantSelector(self)
         self._sun_manager = SunManager(self)
 
     @property

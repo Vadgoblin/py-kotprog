@@ -44,6 +44,9 @@ class PlantManager:
     def spawn_bullet(self,row, col):
         self._game.bullet_manager.spawn_bullet(row,col)
 
+    def spawn_sun(self, row, col):
+        self._game.sun_manager.spawn_sun(row,col)
+
     def draw(self, screen):
         for row in range(self._game.field.rows):
             for col in range(self._game.field.cols):

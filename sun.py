@@ -12,6 +12,7 @@ class Sun:
         self._y = y
         self._width = config["width"]
         self._height = config["height"]
+        self._lifespan = config["lifespan"]
         self._sprite = self._load_sprite()
         self._pickupable = True
         self._alive = True
@@ -62,6 +63,11 @@ class Sun:
         self._die_after_animation = True
 
     def on_tick(self):
+        if self._lifespan == 0:
+            self._alive = False
+            return
+        if self._lifespan > 0:
+            self._lifespan -= 1
         if not self._animated:
             return
 
