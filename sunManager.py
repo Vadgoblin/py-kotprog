@@ -39,6 +39,10 @@ class SunManager:
             sun.draw(screen)
 
     def on_tick(self):
+        for sun in self._suns:
+            if not sun.is_alive:
+                self._suns.remove(sun)
+                continue
         self._sky_sun_spawner()
         self._sun_tick()
 
