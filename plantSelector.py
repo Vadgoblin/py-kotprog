@@ -1,19 +1,19 @@
 import pygame
-
 from config import Config
 import spriteLoader
 
-config = Config().plant
+plant_config = Config().plant
+sun_config = Config().sun
 
 def _load_plants():
     plants = []
-    for plant_type in config["types"]:
+    for plant_type in plant_config["types"]:
         plant = {}
-        plant_config = config[plant_type]
+        _plant_config = plant_config[plant_type]
         plant["type"] = plant_type
-        plant["sprite_path"] = plant_config["sprite"]
-        plant["cost"] = plant_config["cost"]
-        plant["recharge_time"] = plant_config["recharge_time"]
+        plant["sprite_path"] = _plant_config["sprite"]
+        plant["cost"] = _plant_config["cost"]
+        plant["recharge_time"] = _plant_config["recharge_time"]
         plants.append(plant)
     return plants
 
@@ -32,13 +32,14 @@ class PlantSelector:
         self._load_sprites()
         self._load_sun_sprite()
         self._load_font()
+        self._sun_position = (self._x + 5, self._y + 5)
 
     def _load_font(self):
         self._font = pygame.font.Font(Config().game["font"], 18)
 
     def _load_sun_sprite(self):
-        sun_sprite_path = config["sun"]["sprite"]
-        sun_sprite_size = (config["sun"]["width"], config["sun"]["height"])
+        sun_sprite_path = sun_config["sprite"]
+        sun_sprite_size = (sun_config["width"], sun_config["height"])
         sun_sprite = spriteLoader.load(sun_sprite_path, sun_sprite_size)
         self._sun_sprite = sun_sprite
 
@@ -54,6 +55,10 @@ class PlantSelector:
             return None
         return self._plants[self._selected_plant_index]["type"]
 
+    @property
+    def sun_position(self):
+        return self._sun_position
+
     def draw(self, screen):
         self._screen = screen
         self._draw_container()
@@ -67,7 +72,7 @@ class PlantSelector:
 
     def _draw_sun(self):
         pygame.draw.line(self._screen,(148, 72, 32),(self._x + 85,0),(self._x + 85, self._height -1), 5)
-        self._screen.blit(self._sun_sprite, (self._x + 5,self._y + 5))
+        self._screen.blit(self._sun_sprite, self._sun_position)
         pygame.draw.rect(self._screen, (236,237,179), (self._x + 10, self._y + 85, 68, 20), border_radius=8)
 
     def _draw_sun_count(self):
@@ -96,7 +101,6 @@ class PlantSelector:
         self._screen.blit(cost_text,(x + 35 - cost_offset, self._y + 86))
         self._screen.blit(plant["sprite"],(x + 4, self._y + 20))
 
-
     def on_event(self, event: "pygame.event.Event"):
         if event.type != pygame.MOUSEBUTTONDOWN:
             return False
@@ -118,7 +122,6 @@ class PlantSelector:
             self._selected_plant_index = clicked_plant_index
 
         return True
-
 
     def _get_clicked_plant_index(self, click_pos):
         input_x, input_y = click_pos

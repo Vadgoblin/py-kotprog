@@ -30,17 +30,21 @@ class Config:
             "rows": 5,
             "columns": 9,
         }
+        sun = {
+            "sprite": "assets/sun.png",
+            "width": 78,
+            "height": 78,
+            "collect_speed": 10,
+            "sky_fall_speed": 4,
+            "sky_fall_interval": 14000 * 1000 / 60,
+            "sunflower_max_random_distance" : 25
+        }
         plant = {
             "width": 80,
             "height": 80,
             "offset_x": 0,
             "offset_y": 10,
             "types": ["peashooter","sunflower"],
-            "sun" : {
-                "sprite":"assets/sun.png",
-                "width" : 78,
-                "height" : 78,
-            },
             "peashooter":{
                 "hp" : 8,
                 "sprite" : "assets/peashooter.png",
@@ -79,3 +83,4 @@ class Config:
         self.field = MappingProxyType(field)
         self.bullet = MappingProxyType(bullet)
         self.game = MappingProxyType(game)
+        self.sun = MappingProxyType(sun)

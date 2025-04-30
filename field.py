@@ -78,7 +78,7 @@ class Field:
         click_x -= x
         click_y -= y
 
-        if click_x < 0 or click_y < 0 or click_x > width or click_y > height:
+        if click_x < 0 or click_y < 0 or click_x >= width or click_y >= height:
             return None
 
         block_width = width / self._cols
