@@ -51,14 +51,14 @@ class Config:
                 "hp" : 8,
                 "sprite" : "assets/peashooter.png",
                 "shoot_timeout" : 150, #/ (1000/60),
-                "cost" : 50,
-                "recharge_time" : 7.5 * 1000/16
+                "cost" : 100,
+                "recharge_time" : 7500 /16
             },
             "sunflower":{
                 "hp": 8,
                 "sprite": "assets/sunflower.png",
-                "cost": 100,
-                "recharge_time": 7.500 / 16,
+                "cost": 50,
+                "recharge_time": 7500 / 16,
                 "sun_spawn_interval" : 14000/16
             }
         }

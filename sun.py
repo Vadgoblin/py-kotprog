@@ -1,5 +1,4 @@
 import math
-
 from config import Config
 import spriteLoader
 import pygame

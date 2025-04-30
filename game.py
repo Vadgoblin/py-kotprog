@@ -55,6 +55,7 @@ class Game:
         self._zombie_manager.on_tick()
         self._bullet_manager.on_tick()
         self._sun_manager.on_tick()
+        self._plant_selector.on_tick()
 
     def on_event(self, event : "pygame.event.Event"):
         if self._sun_manager.on_event(event): return
