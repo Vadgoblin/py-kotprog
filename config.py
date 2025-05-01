@@ -46,11 +46,11 @@ class Config:
             "height": 80,
             "offset_x": 0,
             "offset_y": 10,
-            "types": ["peashooter","sunflower","wallnut"],
+            "types": ["peashooter","sunflower","wallnut","cherrybomb"],
             "peashooter":{
                 "hp" : 8,
                 "sprite" : "assets/peashooter.png",
-                "shoot_timeout" : 150, #/ (1000/60),
+                "shoot_timeout" : 150,
                 "cost" : 100,
                 "recharge_time" : 7500 /16
             },
@@ -65,7 +65,15 @@ class Config:
                 "hp":72,
                 "cost" : 50,
                 "recharge_time": 30000 / 16,
-                "sprite" : "assets/wallnut.png"
+                "sprite" : "assets/wallnut.png",
+            },
+            "cherrybomb":{
+                "hp":float("inf"),
+                "cost":15,
+                "recharge_time": 50000 / 16,
+                "sprite": "assets/cherrybomb.png",
+                "explode_time": 1000 / 16,
+                "damage": 9999
             }
         }
         bullet = {

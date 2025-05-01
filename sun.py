@@ -65,8 +65,7 @@ class Sun:
         if self._lifespan <= 0:
             self._alive = False
             return
-        if self._lifespan > 0:
-            self._lifespan -= 1
+        self._lifespan -= 1
 
         if not self._animated:
             return

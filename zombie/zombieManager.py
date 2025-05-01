@@ -42,6 +42,16 @@ class ZombieManager:
                 return zombie
         return None
 
+    def get_nearby_zombies(self, row, col):
+        zombies = []
+        x = field.col_to_x(col)
+        for r in range(row-1, row+2):
+            for zombie in self._zombies[r]:
+                distance = field.get_block_width() * 1.5
+                if abs(zombie.x - x) < distance:
+                    zombies.append(zombie)
+        return zombies
+
     def draw(self, screen):
         for row in range(self._game.field.rows):
             for zombie in self._zombies[row]:

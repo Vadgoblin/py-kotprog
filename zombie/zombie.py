@@ -52,8 +52,8 @@ class Zombie:
     def is_hit_by_bullet(self, bullet:"Bullet"):
         return self._x <= bullet.x + bullet.width and self._x + self._width >= bullet.x
 
-    def suffer_damage(self):
-        self._hp -= 1
+    def suffer_damage(self, amount=1):
+        self._hp -= amount
 
     def draw(self, screen):
         position = (self._x + offset_x, self._y + offset_y)

@@ -31,6 +31,12 @@ def col_to_x(col):
     x = field_x + (col * field_block_width)
     return x
 
+def get_block_width():
+    field_width = config["width"]
+    field_cols = config["columns"]
+    field_block_width = field_width / field_cols
+    return field_block_width
+
 
 class Field:
     def __init__(self, game :"Game"):
