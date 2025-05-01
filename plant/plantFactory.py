@@ -1,5 +1,6 @@
 from plant.peashooter import Peashooter
 from plant.sunflower import Sunflower
+from plant.wallnut import Wallnut
 
 
 def plant_factory(plant_manager, plant_type, row, col):
@@ -7,6 +8,8 @@ def plant_factory(plant_manager, plant_type, row, col):
         return Peashooter(plant_manager, row, col)
     if plant_type == "sunflower":
         return Sunflower(plant_manager, row, col)
+    if plant_type == "wallnut":
+        return Wallnut(plant_manager, row, col)
 
     else:
         raise Exception(f"\"{plant_type}\" is an invalid plant type")

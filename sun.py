@@ -62,7 +62,6 @@ class Sun:
         self._die_after_animation = True
 
     def on_tick(self):
-        print(self._lifespan)
         if self._lifespan <= 0:
             self._alive = False
             return

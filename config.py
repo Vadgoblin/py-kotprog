@@ -46,7 +46,7 @@ class Config:
             "height": 80,
             "offset_x": 0,
             "offset_y": 10,
-            "types": ["peashooter","sunflower"],
+            "types": ["peashooter","sunflower","wallnut"],
             "peashooter":{
                 "hp" : 8,
                 "sprite" : "assets/peashooter.png",
@@ -60,6 +60,12 @@ class Config:
                 "cost": 50,
                 "recharge_time": 7500 / 16,
                 "sun_spawn_interval" : 14000/16
+            },
+            "wallnut":{
+                "hp":72,
+                "cost" : 50,
+                "recharge_time": 30000 / 16,
+                "sprite" : "assets/wallnut.png"
             }
         }
         bullet = {
