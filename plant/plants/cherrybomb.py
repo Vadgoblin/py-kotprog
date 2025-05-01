@@ -1,6 +1,6 @@
 from config import Config
 import spriteLoader
-from plant.abstractPlant import AbstractPlant
+from plant.plants.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:

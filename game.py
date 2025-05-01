@@ -2,7 +2,7 @@ from bullet.bulletManager import BulletManager
 from field import Field
 from plant.plantManager import PlantManager
 from plantSelector import PlantSelector
-from sunManager import SunManager
+from sun.sunManager import SunManager
 from zombie.zombieManager import ZombieManager
 from typing import TYPE_CHECKING
 

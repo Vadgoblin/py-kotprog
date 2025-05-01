@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from zombie.zombieManager import ZombieManager
-    from plant.abstractPlant import AbstractPlant
+    from plant.plants.abstractPlant import AbstractPlant
 
 config = Config().zombie
 offset_x = config["offset_x"]

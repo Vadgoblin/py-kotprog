@@ -3,7 +3,7 @@ from zombie.zombie import Zombie
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
-    from plant.abstractPlant import AbstractPlant
+    from plant.plants.abstractPlant import AbstractPlant
     from bullet.bullet import Bullet
     from game import Game
 

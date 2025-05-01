@@ -1,7 +1,7 @@
 import field
 from config import Config
 from plant.plantFactory import plant_factory
-from plant.abstractPlant import AbstractPlant
+from plant.plants.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING,List
 
 if TYPE_CHECKING:

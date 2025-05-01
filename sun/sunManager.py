@@ -2,7 +2,7 @@ import pygame
 import random
 import field
 from config import Config
-from sun import Sun
+from sun.sun import Sun
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
