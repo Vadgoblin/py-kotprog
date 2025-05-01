@@ -79,7 +79,7 @@ class SunManager:
         self._collected_amount += amount
 
     def decrease_collected_amount(self, amount):
-        self._collected_amount -= 50
+        self._collected_amount -= amount
 
     @property
     def sun_amount(self):
