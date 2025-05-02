@@ -12,12 +12,11 @@ if TYPE_CHECKING:
     import pygame
 
 class Game:
-    def __init__(self, config):
+    def __init__(self):
         enemies = [
             {"sleep": 1 * 60, "rows" : [1]},
             {"sleep": 2 * 60, "rows" : [1]}
         ]
-        self._config = config
         self._field = Field(self)
         self._plant_manager = PlantManager(self)
         self._zombie_manager = ZombieManager(self)
@@ -27,10 +26,6 @@ class Game:
         self._enemy_spawner = EnemySpawner(self, enemies)
 
         self._game_status = GameStatus.ONGOING
-
-    @property
-    def config(self):
-        return self._config
 
     @property
     def field(self):

@@ -1,14 +1,15 @@
 import pygame
+from config import Config
 from .game import Game
 from .game import GameStatus
 
 _clock = pygame.time.Clock()
 
 class GameProxy:
-    def __init__(self,screen, config):
+    def __init__(self,screen):
         self._screen = screen
-        self._game = Game(config)
-        self._target_fps = config.game["target_fps"]
+        self._game = Game()
+        self._target_fps = Config().game["target_fps"]
 
     def start(self):
         while self._is_game_ongoing():

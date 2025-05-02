@@ -6,6 +6,7 @@ class Config:
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(Config, cls).__new__(cls)
+            Config._init(cls._instance)
         return cls._instance
 
     @classmethod
@@ -14,7 +15,7 @@ class Config:
             cls._instance = cls()
         return cls._instance
 
-    def __init__(self):
+    def _init(self):
         game = {
             "width": 1080,
             "height": 700,
