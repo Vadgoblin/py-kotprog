@@ -1,6 +1,8 @@
+from config import Config
 import field
 from zombie.zombie import Zombie
 from typing import TYPE_CHECKING, List
+
 
 if TYPE_CHECKING:
     from plant.plants.abstractPlant import AbstractPlant
@@ -12,6 +14,7 @@ class ZombieManager:
     def __init__(self, game:"Game"):
         self._game = game
         self._zombies: List[List[Zombie]] = []
+        self._defeat_x = Config().zombie["defeat_x"]
         for _ in range(game.field.rows):
             self._zombies.append([])
 
@@ -52,6 +55,12 @@ class ZombieManager:
                     zombies.append(zombie)
         return zombies
 
+    def get_number_of_zombies(self):
+        count = 0
+        for row in self._zombies:
+            count += len(row)
+        return count
+
     def draw(self, screen):
         for row in range(self._game.field.rows):
             for zombie in self._zombies[row]:
@@ -63,4 +72,6 @@ class ZombieManager:
                 if not zombie.is_alive:
                     self._zombies[zombie.row].remove(zombie)
                 else:
+                    if zombie.x < self._defeat_x:
+                        self._game.defeat()
                     zombie.on_tick()

@@ -90,6 +90,7 @@ class Config:
             "offset_x": 0,
             "offset_y": -40,
             "spawn_x": 1080,
+            "defeat_x": 180,
             "sprite": "assets/zombie.png",
             "eat_timeout": 500/(1000/60),
             "hp": 10,

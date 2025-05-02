@@ -1,22 +1,31 @@
 from bullet.bulletManager import BulletManager
+from enemySpawner import EnemySpawner
 from field import Field
 from plant.plantManager import PlantManager
 from plant.plantSelector import PlantSelector
 from sun.sunManager import SunManager
 from zombie.zombieManager import ZombieManager
 from typing import TYPE_CHECKING
+from gameStatus import GameStatus
 
 if TYPE_CHECKING:
     import pygame
 
 class Game:
     def __init__(self):
+        enemies = [
+            {"sleep": 1 * 60, "rows" : [1]},
+            {"sleep": 2 * 60, "rows" : [1]}
+        ]
         self._field = Field(self)
         self._plant_manager = PlantManager(self)
         self._zombie_manager = ZombieManager(self)
         self._bullet_manager = BulletManager(self)
         self._plant_selector = PlantSelector(self)
         self._sun_manager = SunManager(self)
+        self._enemy_spawner = EnemySpawner(self, enemies)
+
+        self._game_status = GameStatus.ONGOING
 
     @property
     def field(self):
@@ -51,13 +60,24 @@ class Game:
         self._sun_manager.draw(screen)
 
     def on_tick(self):
+        if self._game_status != GameStatus.ONGOING:
+            return
         self._plant_manager.on_tick()
         self._zombie_manager.on_tick()
         self._bullet_manager.on_tick()
         self._sun_manager.on_tick()
         self._plant_selector.on_tick()
+        self._enemy_spawner.on_tick()
 
     def on_event(self, event : "pygame.event.Event"):
         if self._sun_manager.on_event(event): return
         if self._plant_selector.on_event(event): return
         self._field.on_event(event)
+
+    def victory(self):
+        self._game_status = GameStatus.VICTORY
+        print("victory")
+
+    def defeat(self):
+        self._game_status = GameStatus.DEFEAT
+        print("defeat")

@@ -1,5 +1,4 @@
 import pygame
-from field import Field
 import spriteLoader
 from config import Config
 from game import Game
@@ -18,11 +17,6 @@ bg = spriteLoader.load("assets/background.png")
 clock = pygame.time.Clock()
 
 game = Game()
-game.zombie_manager.spawn_zombie(0)
-game.zombie_manager.spawn_zombie(1)
-game.zombie_manager.spawn_zombie(2)
-game.zombie_manager.spawn_zombie(3)
-game.zombie_manager.spawn_zombie(4)
 
 fc = Config().field
 
