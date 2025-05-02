@@ -1,5 +1,5 @@
 from game import field
-from config import Config
+from config.config import Config
 from game.plant.plantFactory import plant_factory
 from game.plant.plants.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING,List

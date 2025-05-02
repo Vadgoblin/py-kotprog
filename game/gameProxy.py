@@ -1,5 +1,5 @@
 import pygame
-from config import Config
+from config.config import Config
 from .game import Game
 from .game import GameStatus
 

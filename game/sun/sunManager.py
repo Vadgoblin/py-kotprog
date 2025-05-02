@@ -1,7 +1,7 @@
 import pygame
 import random
 from game import field
-from config import Config
+from config.config import Config
 from game.sun.sun import Sun
 from typing import TYPE_CHECKING
 

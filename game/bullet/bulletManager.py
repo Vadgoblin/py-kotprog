@@ -1,5 +1,5 @@
 from game.bullet.bullet import Bullet
-import config
+from config import config
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:

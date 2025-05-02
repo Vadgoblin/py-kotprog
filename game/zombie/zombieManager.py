@@ -1,4 +1,4 @@
-from config import Config
+from config.config import Config
 from game import field
 from game.zombie.zombie import Zombie
 from typing import TYPE_CHECKING, List

@@ -1,5 +1,5 @@
 from game import field, spriteLoader
-from config import Config
+from config.config import Config
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:

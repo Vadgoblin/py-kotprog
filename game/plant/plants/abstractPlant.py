@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from config import Config
+from config.config import Config
 from game import field
 from typing import TYPE_CHECKING
 

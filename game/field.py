@@ -1,7 +1,7 @@
 from math import floor
 import pygame
 import game.spriteLoader as spriteLoader
-from config import Config
+from config.config import Config
 from typing import TYPE_CHECKING
 from .plant.ghostPlantManager import GhostPlantManager
 

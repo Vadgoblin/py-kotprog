@@ -1,4 +1,4 @@
-from config import Config
+from config.config import Config
 from game import spriteLoader
 from game.plant.plants.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING
