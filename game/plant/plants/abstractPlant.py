@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 
 from config import Config
-import field
+from game import field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from plant.plantManager import PlantManager
+    from game.plant.plantManager import PlantManager
 
 config =  Config().plant
 

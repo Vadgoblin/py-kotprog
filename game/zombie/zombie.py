@@ -1,11 +1,10 @@
-import field
-import spriteLoader
+from game import field, spriteLoader
 from config import Config
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from zombie.zombieManager import ZombieManager
-    from plant.plants.abstractPlant import AbstractPlant
+    from game.zombie.zombieManager import ZombieManager
+    from game.plant.plants.abstractPlant import AbstractPlant
 
 config = Config().zombie
 offset_x = config["offset_x"]
@@ -15,7 +14,7 @@ spawn_x = config["spawn_x"]
 def _load_sprite():
     size = (config["width"], config["height"])
     sprite_path = config["sprite"]
-    return spriteLoader.load(sprite_path,size)
+    return spriteLoader.load(sprite_path, size)
 
 
 class Zombie:

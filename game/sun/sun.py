@@ -1,6 +1,6 @@
 import math
 from config import Config
-import spriteLoader
+from game import spriteLoader
 import pygame
 
 config = Config().sun

@@ -1,10 +1,9 @@
-import field
-import spriteLoader
+from game import field, spriteLoader
 from config import Config
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from bullet.bulletManager import BulletManager
+    from game.bullet.bulletManager import BulletManager
 
 config = Config().bullet
 _despawn_x = Config().game["width"]

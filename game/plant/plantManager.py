@@ -1,11 +1,11 @@
-import field
+from game import field
 from config import Config
-from plant.plantFactory import plant_factory
-from plant.plants.abstractPlant import AbstractPlant
+from game.plant.plantFactory import plant_factory
+from game.plant.plants.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING,List
 
 if TYPE_CHECKING:
-    from game import Game
+    from game.game import Game
 
 plant_config = Config().plant
 

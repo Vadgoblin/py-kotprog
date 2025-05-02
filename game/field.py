@@ -1,12 +1,12 @@
 from math import floor
 import pygame
-import spriteLoader
+import game.spriteLoader as spriteLoader
 from config import Config
 from typing import TYPE_CHECKING
-from plant.ghostPlantManager import GhostPlantManager
+from .plant.ghostPlantManager import GhostPlantManager
 
 if TYPE_CHECKING:
-    from game import Game
+    from .game import Game
 
 config = Config().field
 

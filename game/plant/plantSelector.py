@@ -1,10 +1,10 @@
 import pygame
 from config import Config
-import spriteLoader
+from game import spriteLoader
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from game import Game
+    from game.game import Game
 
 plant_config = Config().plant
 sun_config = Config().sun
@@ -51,7 +51,7 @@ class PlantSelector:
     def _load_sprites(self):
         for plant in self._plants:
             sprite_path = plant["sprite_path"]
-            sprite = spriteLoader.load(sprite_path, (60,60))
+            sprite = spriteLoader.load(sprite_path, (60, 60))
             plant["sprite"] = sprite
 
     @property

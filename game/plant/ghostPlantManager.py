@@ -1,5 +1,4 @@
-import field
-import spriteLoader
+from game import field, spriteLoader
 from config import Config
 
 config = Config().plant
@@ -21,7 +20,7 @@ class GhostPlantManager:
         sprites = {}
         for _type in self._types:
             path = config[_type]["sprite"]
-            sprite = spriteLoader.load(path,size, True)
+            sprite = spriteLoader.load(path, size, True)
             sprites[_type] = sprite
         self._sprites = sprites
 

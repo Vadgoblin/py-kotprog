@@ -1,13 +1,13 @@
 from config import Config
-import field
-from zombie.zombie import Zombie
+from game import field
+from game.zombie.zombie import Zombie
 from typing import TYPE_CHECKING, List
 
 
 if TYPE_CHECKING:
-    from plant.plants.abstractPlant import AbstractPlant
-    from bullet.bullet import Bullet
-    from game import Game
+    from game.plant.plants.abstractPlant import AbstractPlant
+    from game.bullet.bullet import Bullet
+    from game.game import Game
 
 
 class ZombieManager:

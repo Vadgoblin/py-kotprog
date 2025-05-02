@@ -1,9 +1,9 @@
-from bullet.bullet import Bullet
+from game.bullet.bullet import Bullet
 import config
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
-    from game import Game
+    from game.game import Game
 
 config = config.Config().bullet
 

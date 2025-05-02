@@ -1,11 +1,11 @@
 from config import Config
-import spriteLoader
-from plant.plants.abstractPlant import AbstractPlant
+from game import spriteLoader
+from game.plant.plants.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING
 
 
 if TYPE_CHECKING:
-    from plant.plantManager import PlantManager
+    from game.plant.plantManager import PlantManager
 
 
 config = Config().plant
@@ -15,7 +15,7 @@ def _get_sprite():
     sprite_path = config["peashooter"]["sprite"]
     width = config["width"]
     height = config["height"]
-    return spriteLoader.load(sprite_path,(width,height))
+    return spriteLoader.load(sprite_path, (width, height))
 
 
 class Peashooter(AbstractPlant):

@@ -1,22 +1,23 @@
-from bullet.bulletManager import BulletManager
-from enemySpawner import EnemySpawner
-from field import Field
-from plant.plantManager import PlantManager
-from plant.plantSelector import PlantSelector
-from sun.sunManager import SunManager
-from zombie.zombieManager import ZombieManager
+from .bullet.bulletManager import BulletManager
+from .enemySpawner import EnemySpawner
+from .field import Field
+from .plant.plantManager import PlantManager
+from .plant.plantSelector import PlantSelector
+from .sun.sunManager import SunManager
+from .zombie.zombieManager import ZombieManager
 from typing import TYPE_CHECKING
-from gameStatus import GameStatus
+from .gameStatus import GameStatus
 
 if TYPE_CHECKING:
     import pygame
 
 class Game:
-    def __init__(self):
+    def __init__(self, config):
         enemies = [
             {"sleep": 1 * 60, "rows" : [1]},
             {"sleep": 2 * 60, "rows" : [1]}
         ]
+        self._config = config
         self._field = Field(self)
         self._plant_manager = PlantManager(self)
         self._zombie_manager = ZombieManager(self)
@@ -26,6 +27,10 @@ class Game:
         self._enemy_spawner = EnemySpawner(self, enemies)
 
         self._game_status = GameStatus.ONGOING
+
+    @property
+    def config(self):
+        return self._config
 
     @property
     def field(self):

@@ -1,12 +1,12 @@
 import pygame
 import random
-import field
+from game import field
 from config import Config
-from sun.sun import Sun
+from game.sun.sun import Sun
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from game import Game
+    from game.game import Game
 
 field_config = Config().field
 sun_config = Config().sun
@@ -29,8 +29,8 @@ class SunManager:
 
     def spawn_sun(self,row, col):
         d = self._sunflower_max_random_distance
-        x = field.col_to_x(col) + rnd.randint(-d,d)
-        y = field.row_to_y(row)+ rnd.randint(-d,d)
+        x = field.col_to_x(col) + rnd.randint(-d, d)
+        y = field.row_to_y(row) + rnd.randint(-d, d)
         new_sun = Sun(x,y)
         self._suns.append(new_sun)
 

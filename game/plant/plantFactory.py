@@ -1,7 +1,7 @@
-from plant.plants.cherrybomb import Cherrybomb
-from plant.plants.peashooter import Peashooter
-from plant.plants.sunflower import Sunflower
-from plant.plants.wallnut import Wallnut
+from game.plant.plants.cherrybomb import Cherrybomb
+from game.plant.plants.peashooter import Peashooter
+from game.plant.plants.sunflower import Sunflower
+from game.plant.plants.wallnut import Wallnut
 
 
 def plant_factory(plant_manager, plant_type, row, col):
