@@ -37,3 +37,11 @@ class Config:
             raise Exception("error occurred while parsing config")
 
         validate_config()
+
+        self.menu = {
+            "background" : "assets/menu.png",
+            "exit_rect": (921,556,111,116),
+            "easy_button_edges" : ((538, 105),(973, 148),(937, 317),(523, 260)),
+            "normal_button_edges" : ((530, 266), (938, 334),(910, 439),(533, 369)),
+            "hard_button_edges" : ((542, 381), (902, 447), (880, 549), (541, 478)),
+        }
