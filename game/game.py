@@ -3,10 +3,12 @@ from .enemySpawner import EnemySpawner
 from .field import Field
 from .plant.plantManager import PlantManager
 from .plant.plantSelector import PlantSelector
+from .soundPlayer import _SoundPlayer
 from .sun.sunManager import SunManager
 from .zombie.zombieManager import ZombieManager
 from typing import TYPE_CHECKING
 from .gameStatus import GameStatus
+from game import soundPlayer
 
 
 if TYPE_CHECKING:
@@ -22,8 +24,11 @@ class Game:
         self._plant_selector = PlantSelector(self)
         self._sun_manager = SunManager(self)
         self._enemy_spawner = EnemySpawner(self, level)
+        self._sound_player = _SoundPlayer()
 
         self._game_status = GameStatus.ONGOING
+
+        soundPlayer.play_bgm()
 
     @property
     def field(self):
@@ -49,6 +54,11 @@ class Game:
     def sun_manager(self):
         return self._sun_manager
 
+    @property
+    def sound_player(self):
+        return self._sound_player
+
+
     def draw(self, screen):
         self._field.draw(screen)
         self._plant_manager.draw(screen)
@@ -71,6 +81,7 @@ class Game:
         if self._sun_manager.on_event(event): return
         if self._plant_selector.on_event(event): return
         self._field.on_event(event)
+
 
     def victory(self):
         self._game_status = GameStatus.VICTORY

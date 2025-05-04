@@ -1,4 +1,4 @@
-from game import field
+from game import field, soundPlayer
 from config.config import Config
 from game.plant.plantFactory import plant_factory
 from game.plant.plants.abstractPlant import AbstractPlant
@@ -44,6 +44,7 @@ class PlantManager:
         if sun_amount < plant_cost:
             raise Exception(f"Not enough sun. {plant_type} costs {plant_cost} but only have {sun_amount}")
 
+        soundPlayer.play_plant()
         self._plants[row][col] = plant_factory(self, plant_type, row, col)
         self._game.sun_manager.decrease_collected_amount(plant_cost)
         self._game.plant_selector.disable_plant(plant_type)

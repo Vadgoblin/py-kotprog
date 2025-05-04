@@ -49,6 +49,8 @@ class ZombieManager:
         zombies = []
         x = field.col_to_x(col)
         for r in range(row-1, row+2):
+            if r < 0 or r >= self._game.field.rows:
+                continue
             for zombie in self._zombies[r]:
                 distance = field.get_block_width() * 1.5
                 if abs(zombie.x - x) < distance:

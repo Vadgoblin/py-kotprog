@@ -1,6 +1,6 @@
 import pygame
 import random
-from game import field
+from game import field, soundPlayer
 from config.config import Config
 from game.sun.sun import Sun
 from typing import TYPE_CHECKING
@@ -95,6 +95,7 @@ class SunManager:
                 return True
 
     def _collect_sun(self, sun : "Sun"):
+        soundPlayer.play_sun_pickup()
         collected_sun_pos = self._game.plant_selector.sun_position
         sun.animate_and_die(*collected_sun_pos, animation_speed=self._collect_speed)
         self._increase_collected_amount(25)

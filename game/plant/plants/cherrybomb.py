@@ -1,5 +1,5 @@
 from config.config import Config
-from game import spriteLoader
+from game import spriteLoader, soundPlayer
 from game.plant.plants.abstractPlant import AbstractPlant
 from typing import TYPE_CHECKING
 
@@ -32,6 +32,7 @@ class Cherrybomb(AbstractPlant):
             self._explode()
 
     def _explode(self):
+        soundPlayer.play_cherry_bomb()
         zombies = self._plant_manager._game.zombie_manager.get_nearby_zombies(self._row, self._col)
         for zombie in zombies:
             zombie.suffer_damage(self._damage)

@@ -81,7 +81,7 @@
         "spawn_x": 1080,
         "defeat_x": 180,
         "sprite": "assets/zombie.png",
-        "eat_timeout": 30,
+        "eat_timeout": 40,
         "hp": 10
     },
     "menu": {

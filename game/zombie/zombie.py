@@ -1,6 +1,7 @@
 from game import field, spriteLoader
 from config.config import Config
 from typing import TYPE_CHECKING
+from game import soundPlayer
 
 if TYPE_CHECKING:
     from game.zombie.zombieManager import ZombieManager
@@ -73,4 +74,5 @@ class Zombie:
             self._eat_timeout -= 1
         else:
             plant.suffer_damage()
+            soundPlayer.play_chomp()
             self._eat_timeout = config["eat_timeout"]

@@ -38,3 +38,14 @@ class Config:
             raise Exception("error occurred while parsing config")
 
         validate_config()
+
+        self.audio = {
+            "bgm":"assets/bgm.mp3",
+            "win_music": "assets/winmusic.ogg",
+
+            "chomp":"assets/chomp.ogg",
+            "plant":"assets/plant.ogg",
+            "sun_pickup":"assets/points.ogg",
+            "splat": "assets/splat.ogg",
+            "cherry_bomb" : "assets/cherrybomb.ogg"
+        }

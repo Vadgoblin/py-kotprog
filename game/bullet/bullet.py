@@ -1,4 +1,4 @@
-from game import field, spriteLoader
+from game import field, spriteLoader, soundPlayer
 from config.config import Config
 from typing import TYPE_CHECKING
 
@@ -44,6 +44,7 @@ class Bullet:
         if hit_zombie is None:
             self._x += config["speed"]
         else:
+            soundPlayer.play_splat()
             hit_zombie.suffer_damage()
             self._is_alive = False
 

@@ -1,6 +1,11 @@
+import time
+
 import pygame
+from pygame import mixer
+
 from config import Config
 from menu import Menu
+import pygame.mixer
 
 _screen : "pygame.Surface|None"= None
 
