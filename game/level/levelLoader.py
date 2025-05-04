@@ -8,7 +8,6 @@ from game.level.level import Level
 def load_level(path):
     _validate_path(path)
     level_data = _load_level_data(path)
-    print(level_data)
     _validate_level_data(level_data)
     level = Level(level_data)
     return level
@@ -29,21 +28,35 @@ def _validate_level_data(level_data):
         raise Exception("Invalid level data")
 
     for entry in level_data:
-        if not isinstance(entry,dict):
-            raise Exception("Invalid level data")
-        if "sleep" not in entry.keys():
-            raise Exception("Invalid level data")
-        if "rows" not in entry.keys():
-            raise Exception("Invalid level data")
-        if not isinstance(entry["sleep"], numbers.Number):
-            raise Exception("Invalid level data")
-        if entry["sleep"] < 0:
-            raise Exception("Invalid level data")
-        if not isinstance(entry["rows"],list):
+        _validate_entry(entry)
+
+def _validate_entry(entry):
+    _require_type(entry, dict)
+
+    required_keys = ["sleep", "rows"]
+    _require_keys(entry,required_keys)
+
+    _validate_sleep(entry)
+    _validate_row(entry)
+
+def _validate_sleep(entry):
+    _require_type(entry["sleep"], numbers.Number)
+    if entry["sleep"] < 0:
+        raise Exception("Invalid level data")
+
+def _validate_row(entry):
+    _require_type(entry["rows"], list)
+    max_rows = Config().field["rows"]
+    for row in entry["rows"]:
+        _require_type(row, int)
+        if not (0 <= row < max_rows):
             raise Exception("Invalid level data")
 
-        for _row in entry["rows"]:
-            if not isinstance(_row,int):
-                raise Exception("Invalid level data")
-            if _row < 0 or _row >= Config().field["rows"]:
-                raise Exception("Invalid level data")
+def _require_keys(_dict, keys):
+    for key in keys:
+        if key not in _dict:
+            raise Exception("Invalid level data")
+
+def _require_type(obj, expected_type):
+    if not isinstance(obj, expected_type):
+        raise Exception("Invalid level data")
