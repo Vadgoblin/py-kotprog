@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
     from game.game import Game
+    from pygame.surface import Surface
 
 config = config.Config().bullet
 
@@ -27,7 +28,7 @@ class BulletManager:
                 if not bullet.is_alive:
                     self._bullets[bullet.row].remove(bullet)
 
-    def draw(self, screen):
+    def draw(self, screen : "Surface"):
         for row in range(self._game.field.rows):
             for bullet in self._bullets[row]:
                 bullet.draw(screen)

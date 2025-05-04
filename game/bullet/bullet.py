@@ -4,9 +4,9 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from game.bullet.bulletManager import BulletManager
+    from pygame.surface import Surface
 
 config = Config().bullet
-_despawn_x = Config().game["width"]
 
 class Bullet:
     def __init__(self,bullet_manager : "BulletManager", row, col):
@@ -17,6 +17,7 @@ class Bullet:
         self._width = config["width"]
         self._height = config["height"]
         self._sprite = spriteLoader.load(config["sprite"], (self._width, self._height))
+        self._despawn_x = Config().game["width"]
         self._is_alive = True
 
     @property
@@ -35,7 +36,7 @@ class Bullet:
     def is_alive(self):
         if not self._is_alive:
             return False
-        if self.x > _despawn_x:
+        if self.x > self._despawn_x:
             return False
         return True
 
@@ -48,6 +49,6 @@ class Bullet:
             hit_zombie.suffer_damage()
             self._is_alive = False
 
-    def draw(self, screen):
+    def draw(self, screen : "Surface"):
         screen.blit(self._sprite, (self._x, self._y))
         pass

@@ -21,7 +21,7 @@ class GameProxy:
             self._process_events()
             self._tick()
             self._draw()
-            _clock.tick(100)
+            _clock.tick(self._target_fps)
 
     def _is_game_ongoing(self):
         return self._game._game_status == GameStatus.ONGOING

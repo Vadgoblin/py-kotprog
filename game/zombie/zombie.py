@@ -2,6 +2,7 @@ from game import field, spriteLoader
 from config.config import Config
 from typing import TYPE_CHECKING
 from game import soundPlayer
+from game.bullet.bullet import Bullet
 
 if TYPE_CHECKING:
     from game.zombie.zombieManager import ZombieManager
@@ -55,7 +56,7 @@ class Zombie:
     def suffer_damage(self, amount=1):
         self._hp -= amount
 
-    def draw(self, screen):
+    def draw(self, screen: ""):
         position = (self._x + offset_x, self._y + offset_y)
         screen.blit(self._sprite, position)
 
