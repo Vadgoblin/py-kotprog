@@ -1,1 +1,1 @@
-from .menu import show_menu
+from .menu import Menu

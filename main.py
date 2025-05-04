@@ -1,14 +1,14 @@
 import pygame
 from config import Config
 from game import Game
-import menu
-
+from menu import Menu
 
 _screen : "pygame.Surface|None"= None
 
 def main():
     _initialize_screen()
-    menu.show_menu(_screen)
+    menu = Menu(_screen)
+    menu.show()
     # game = Game(_screen)
     # game.start()
 
