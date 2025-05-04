@@ -25,6 +25,11 @@ def play_splat():
 def play_cherry_bomb():
     _play_sfx("cherry_bomb")
 
+def stop():
+    global _soundPlayer
+    if isinstance(_soundPlayer, _SoundPlayer):
+        _soundPlayer.stop()
+
 def _play_music(music_name):
     global _soundPlayer
     if _soundPlayer is None:
@@ -42,18 +47,25 @@ class _SoundPlayer:
     def __init__(self):
         audio = {}
         for name, path in Config().audio.items():
+            if name == "num_of_channels":
+                continue
             audio[name] = Sound(path)
         self._audio = audio
+        self._num_of_channels = Config().audio["num_of_channels"]
 
-        mixer.set_num_channels(1000)
+        mixer.set_num_channels(self._num_of_channels)
 
     def play_music(self,music_name):
         mixer.Channel(0).play(self._audio[music_name])
 
     def play_sfx(self,sfx_name):
-        for i in range(1, 100):
+        for i in range(1, self._num_of_channels):
             channel = mixer.Channel(i)
             if channel.get_busy():
                 continue
             channel.play(self._audio[sfx_name])
             break
+
+    def stop(self):
+        for i in range(0, self._num_of_channels):
+            mixer.Channel(i).stop()

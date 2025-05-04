@@ -40,6 +40,7 @@ class Config:
         validate_config()
 
         self.audio = {
+            "num_of_channels":1000,
             "bgm":"assets/bgm.mp3",
             "win_music": "assets/winmusic.ogg",
 
