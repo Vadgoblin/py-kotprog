@@ -33,15 +33,8 @@ class Config:
                 self.bullet = MappingProxyType(config["bullet"])
                 self.game = MappingProxyType(config["game"])
                 self.sun = MappingProxyType(config["sun"])
+                self.menu = MappingProxyType(config["menu"])
         except:
             raise Exception("error occurred while parsing config")
 
         validate_config()
-
-        self.menu = {
-            "background" : "assets/menu.png",
-            "exit_button_edges": ((921, 556), (1032, 556), (1032, 672), (921, 672)),
-            "easy_button_edges" : ((538, 105),(973, 148),(937, 317),(523, 260)),
-            "normal_button_edges" : ((530, 266), (938, 334),(910, 439),(533, 369)),
-            "hard_button_edges" : ((542, 381), (902, 447), (880, 549), (541, 478)),
-        }
