@@ -1,18 +1,24 @@
+from typing import List
+
 import config
 from numbers import Number
 
 _config : "config.Config|None" = None
 
 def validate_config():
-    global _config
-    _config = config.Config()
+    try:
+        global _config
+        _config = config.Config()
 
-    _validate_field()
-    _validate_sun()
-    _validate_plant()
-    _validate_plant_types()
-    _validate_bullet()
-    _validate_zombie()
+        _validate_field()
+        _validate_sun()
+        _validate_plant()
+        _validate_plant_types()
+        _validate_bullet()
+        _validate_zombie()
+        _validate_menu()
+    except:
+        _rise_exception()
 
 def _validate_game():
     game = _config.game
@@ -131,7 +137,34 @@ def _validate_zombie():
     }
     _validate_dict(zombie,expected_zombie)
 
+def _validate_menu():
+    menu = _config.menu
+    expected_menu = {
+        "background": str,
+        "exit_button_edges": List,
+        "easy_button_edges": List,
+        "normal_button_edges": List,
+        "hard_button_edges": List,
+    }
+    _validate_dict(menu,expected_menu)
+
+    def is_coord_pair(pair):
+        return (isinstance(pair, list) and len(pair) == 2 and
+                all(isinstance(p, Number) for p in pair))
+
+    def is_quad_edge_list(edge_list):
+        return (isinstance(edge_list, list) and len(edge_list) == 4 and
+                all(is_coord_pair(p) for p in edge_list))
+
+    for edge_key in ["exit_button_edges", "easy_button_edges", "normal_button_edges", "hard_button_edges"]:
+        if edge_key in menu and not is_quad_edge_list(menu[edge_key]):
+            _rise_exception()
+
+
 def _validate_dict(dict_, excepted):
     for key, expected_type in excepted.items():
         if key not in dict_ or not isinstance(dict_[key], expected_type):
-            raise Exception(f"error while parsing config")
+            _rise_exception()
+
+def _rise_exception():
+    raise Exception(f"invalid config")
