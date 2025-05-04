@@ -1,4 +1,6 @@
 import pygame
+import game.level.levelLoader
+from game import Game
 from ._button import Button
 from config import Config
 
@@ -14,6 +16,7 @@ class Menu:
         self._config = Config()
         self._background = self._get_background()
         self._buttons = self._get_buttons()
+        self._game = Game(screen)
 
     def _get_background(self):
         bg_path = self._config.menu["background"]
@@ -42,24 +45,31 @@ class Menu:
 
     def _process_events(self):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                _exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                click_pos = event.dict['pos']
-                self._process_click(click_pos)
+            self._process_event(event)
+
+    def _process_event(self,event):
+        if event.type == pygame.QUIT:
+            _exit()
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            click_pos = event.dict['pos']
+            self._process_click(click_pos)
 
     def _process_click(self, click_pos):
         clicked_button = self._get_clicked_button_name(click_pos)
         if clicked_button == "exit":
             _exit()
         elif clicked_button == "easy":
-            print("ez")
+            self._play("easy")
         elif clicked_button == "normal":
-            print("norm")
+            self._play("normal")
         elif clicked_button == "hard":
-            print("hrd")
+            self._play("hard")
 
     def _get_clicked_button_name(self, click_pos):
         for name, btn in self._buttons.items():
             if btn.is_clicked(click_pos):
                 return name
+
+    def _play(self, difficulty):
+        level = game.level.levelLoader.load_level(f"levels/{difficulty}.json")
+        self._game.start(level)

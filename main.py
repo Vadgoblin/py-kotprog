@@ -1,20 +1,13 @@
 import pygame
 from config import Config
-from game import Game
-from game import levelLoader
 from menu import Menu
 
 _screen : "pygame.Surface|None"= None
 
 def main():
     _initialize_screen()
-    # menu = Menu(_screen)
-    # menu.show()
-
-    level = levelLoader.load_level("levels/normal.json")
-
-    game = Game(_screen)
-    game.start(level)
+    menu = Menu(_screen)
+    menu.show()
 
 def _initialize_screen():
     global _screen
