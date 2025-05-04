@@ -40,7 +40,7 @@ class PlantSelector:
         self._sun_position = (self._x + 5, self._y + 5)
 
     def _load_font(self):
-        self._font = pygame.font.Font(Config().game["font"], 18)
+        self._font = pygame.font.Font(Config().game["number_font"], 18)
 
     def _load_sun_sprite(self):
         sun_sprite_path = sun_config["sprite"]

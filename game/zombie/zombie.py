@@ -68,7 +68,7 @@ class Zombie:
             self._move()
 
     def _move(self):
-        self._x -= 1
+        self._x -= 10
 
     def _eat(self, plant: "AbstractPlant"):
         if self._eat_timeout > 0:

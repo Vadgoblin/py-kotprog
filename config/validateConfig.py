@@ -10,6 +10,7 @@ def validate_config():
         global _config
         _config = config.Config()
 
+        _validate_game()
         _validate_field()
         _validate_sun()
         _validate_plant()
@@ -26,7 +27,8 @@ def _validate_game():
         "width": Number,
         "height": Number,
         "target_fps": Number,
-        "font": str,
+        "text_font": str,
+        "number_font": str,
         "background": str
     }
     _validate_dict(game, expected_game)

@@ -3,7 +3,8 @@
         "width": 1080,
         "height": 700,
         "target_fps": 60,
-        "font": "assets/font.ttf",
+        "number_font": "assets/font.ttf",
+        "text_font": "assets/font2.ttf",
         "background": "assets/background.png"
     },
     "field": {

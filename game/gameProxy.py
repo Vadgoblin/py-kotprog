@@ -3,14 +3,16 @@ from config.config import Config
 from .game import Game
 from .game import GameStatus
 from typing import TYPE_CHECKING
+from .gameoverScreen import display_victory_screen, display_defeat_screen
 
 if TYPE_CHECKING:
     from game.level.level import Level
+    from pygame.surface import Surface
 
 _clock = pygame.time.Clock()
 
 class GameProxy:
-    def __init__(self,screen):
+    def __init__(self,screen : "Surface"):
         self._screen = screen
         self._game = None
         self._target_fps = Config().game["target_fps"]
@@ -23,8 +25,13 @@ class GameProxy:
             self._draw()
             _clock.tick(self._target_fps)
 
+        if self._game.game_status == GameStatus.DEFEAT:
+            display_defeat_screen(self._screen)
+        elif self._game.game_status == GameStatus.VICTORY:
+            display_victory_screen(self._screen)
+
     def _is_game_ongoing(self):
-        return self._game._game_status == GameStatus.ONGOING
+        return self._game.game_status == GameStatus.ONGOING
 
     def _process_events(self):
         for event in pygame.event.get():

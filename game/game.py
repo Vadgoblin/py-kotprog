@@ -1,3 +1,5 @@
+from random import Random
+
 from .bullet.bulletManager import BulletManager
 from .enemySpawner import EnemySpawner
 from .field import Field
@@ -57,6 +59,10 @@ class Game:
     @property
     def sound_player(self):
         return self._sound_player
+
+    @property
+    def game_status(self):
+        return self._game_status
 
 
     def draw(self, screen):
