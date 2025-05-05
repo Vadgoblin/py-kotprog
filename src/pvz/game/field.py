@@ -40,6 +40,10 @@ def validate_row(row):
     if not isinstance(row, int) or row < 0 or row >= config["rows"]:
         raise Exception(f"Expected row to be an integer between 0 and {config["rows"] - 1}, got {row}")
 
+def validate_column(col):
+    if not isinstance(col, int) or col < 0 or col >= config["columns"]:
+        raise Exception(f"Expected row to be an integer between 0 and {config["columns"] - 1}, got {col}")
+
 
 class Field:
     def __init__(self, game :"Game"):

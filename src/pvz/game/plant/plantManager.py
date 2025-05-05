@@ -32,12 +32,9 @@ class PlantManager:
 
     def plant_plant(self, plant_type, row, col):
         _validate_plant_type(plant_type)
-        if not isinstance(row,int) or row < 0 or row >= self._game.field.rows:
-            raise Exception(f"Expected row to be an integer between 0 and {self._game.field.rows- 1}, got {row}")
-        if not isinstance(col,int) or col < 0 or col >= self._game.field.cols:
-            raise Exception(f"Expected row to be an integer between 0 and {self._game.field.cols - 1}, got {col}")
-        if not self.is_space_empty(row, col):
-            raise Exception(f"There is already a plant at row {row} column {col}")
+        field.validate_row(row)
+        field.validate_column(col)
+        self._validate_empty_space(row,col)
 
         sun_amount = self._game.sun_manager.sun_amount
         plant_cost = _get_plant_cost(plant_type)
@@ -48,6 +45,10 @@ class PlantManager:
         self._plants[row][col] = plant_factory(self, plant_type, row, col)
         self._game.sun_manager.decrease_collected_amount(plant_cost)
         self._game.plant_selector.disable_plant(plant_type)
+
+    def _validate_empty_space(self,row, col):
+        if not self.is_space_empty(row, col):
+            raise Exception(f"There is already a plant at row {row} column {col}")
 
     def does_plant_see_zombie(self, plant):
         return self._game.zombie_manager.does_plant_see_zombie(plant)
