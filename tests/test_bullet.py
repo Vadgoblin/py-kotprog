@@ -3,7 +3,7 @@ from unittest.mock import Mock
 from src.pvz.game.bullet.bullet import Bullet
 
 class TestBullet(unittest.TestCase):
-    def test_idk(self):
+    def test_init(self):
         row = 1
         col = 1
         bullet = Bullet(Mock(),row, col)
