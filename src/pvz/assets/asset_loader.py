@@ -1,16 +1,13 @@
 from importlib.resources import files
 from PIL import Image
-import pygame
-import tempfile
-import shutil
-
 import tempfile
 import shutil
 import pygame
 from pathlib import Path
 from pygame.mixer import Sound
-from typing import cast, IO
+from functools import lru_cache
 
+@lru_cache(maxsize=None)
 def load_sprite(name, size = None, ghost = False):
     path = _resolve_asset_file(name)
 
@@ -31,7 +28,7 @@ def load_sprite(name, size = None, ghost = False):
     scaled_image = pygame.image.fromstring(pil_image.tobytes(), pil_image.size, pil_image.mode)
     return scaled_image
 
-
+@lru_cache(maxsize=None)
 def load_font(name, size):
     font_resource = _resolve_asset_file(name)
 
@@ -42,6 +39,7 @@ def load_font(name, size):
 
     return pygame.font.Font(str(tmp_path), size)
 
+@lru_cache(maxsize=None)
 def load_sound(name):
     resource = _resolve_asset_file(name)
     with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_file:
