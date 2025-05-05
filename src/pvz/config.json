@@ -91,5 +91,15 @@
         "easy_button_edges": [[538,105],[973,148],[937,317],[523,260]],
         "normal_button_edges": [[530,266],[938,334],[910,439],[533,369]],
         "hard_button_edges": [[542,381],[902,447],[880,549],[541,478]]
+    },
+    "audio": {
+        "num_of_channels":1000,
+        "bgm":"bgm.mp3",
+        "win_music": "winmusic.ogg",
+        "chomp":"chomp.ogg",
+        "plant":"plant.ogg",
+        "sun_pickup":"points.ogg",
+        "splat": "splat.ogg",
+        "cherry_bomb" : "cherrybomb.ogg"
     }
 }

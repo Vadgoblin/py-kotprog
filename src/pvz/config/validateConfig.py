@@ -17,6 +17,7 @@ def validate_config():
         _validate_plant_types()
         _validate_bullet()
         _validate_zombie()
+        _validate_audio()
         _validate_menu()
     except:
         _rise_exception()
@@ -138,6 +139,20 @@ def _validate_zombie():
         "hp": Number
     }
     _validate_dict(zombie,expected_zombie)
+
+def _validate_audio():
+    audio = _config.audio
+    expected_audio = {
+        "num_of_channels": int,
+        "bgm": str,
+        "win_music": str,
+        "chomp": str,
+        "plant": str,
+        "sun_pickup": str,
+        "splat": str,
+        "cherry_bomb": str,
+    }
+    _validate_dict(audio,expected_audio)
 
 def _validate_menu():
     menu = _config.menu
