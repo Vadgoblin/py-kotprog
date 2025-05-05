@@ -14,7 +14,6 @@ def _get_sprite():
     sprite_path = Config().game["background"]
     return load_sprite(sprite_path)
 
-
 def row_to_y(row):
     field_y = config["y"]
     field_height = config["height"]
@@ -36,6 +35,10 @@ def get_block_width():
     field_cols = config["columns"]
     field_block_width = field_width / field_cols
     return field_block_width
+
+def validate_row(row):
+    if not isinstance(row, int) or row < 0 or row >= config["rows"]:
+        raise Exception(f"Expected row to be an integer between 0 and {config["rows"] - 1}, got {row}")
 
 
 class Field:
@@ -90,12 +93,10 @@ class Field:
         block_width = width / self._cols
         block_height = height / self._rows
 
-
-
         col = floor(click_x / block_width)
         row = floor(click_y / block_height)
 
-        return (row,col)
+        return row,col
 
     def _plant_plant(self, mouse_pos):
         selected_plant = self._game.plant_selector.selected_plant

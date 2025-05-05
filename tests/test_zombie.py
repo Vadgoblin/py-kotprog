@@ -1,8 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
-
 from src.pvz.config import Config
-
 from src.pvz.game.zombie.zombie import Zombie
 from src.pvz.game.field import row_to_y
 
@@ -16,6 +14,7 @@ class TestZombie(unittest.TestCase):
         self.assertEqual(zombie.row, row)
         self.assertEqual(zombie.x, config.zombie["spawn_x"])
         self.assertEqual(zombie.y, y)
+        self.assertTrue(zombie.width != 0)
 
     @patch('src.pvz.game.soundPlayer.play_chomp')
     def test_tick_movement(self, mock_play_chomp):

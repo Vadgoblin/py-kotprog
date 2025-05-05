@@ -5,7 +5,7 @@ from .plant.plantManager import PlantManager
 from .plant.plantSelector import PlantSelector
 from .soundPlayer import _SoundPlayer
 from .sun.sunManager import SunManager
-from .zombie.zombieManager import ZombieManager
+from .zombie.zombie_manager import ZombieManager
 from typing import TYPE_CHECKING
 from .gameStatus import GameStatus
 from . import soundPlayer

@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from src.pvz.game.bullet.bullet import Bullet
 
 if TYPE_CHECKING:
-    from src.pvz.game.zombie.zombieManager import ZombieManager
+    from src.pvz.game.zombie.zombie_manager import ZombieManager
     from src.pvz.game.plant.plants.abstractPlant import AbstractPlant
 
 class Zombie:

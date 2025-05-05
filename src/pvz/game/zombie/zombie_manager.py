@@ -19,8 +19,7 @@ class ZombieManager:
             self._zombies.append([])
 
     def spawn_zombie(self, row):
-        if not isinstance(row,int) or row < 0 or row >= self._game.field.rows:
-            raise Exception(f"Expected row to be an integer between 0 and {self._game.field.rows - 1}, got {row}")
+        field.validate_row(row)
         self._zombies[row].append(Zombie(self, row))
 
     def does_plant_see_zombie(self, plant:"AbstractPlant"):
