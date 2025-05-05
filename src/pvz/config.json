@@ -1,0 +1,95 @@
+{
+    "game": {
+        "width": 1080,
+        "height": 700,
+        "target_fps": 60,
+        "number_font": "font.ttf",
+        "text_font": "font2.ttf",
+        "background": "background.png"
+    },
+    "field": {
+        "x": 260,
+        "y": 169,
+        "width": 730,
+        "height": 506,
+        "rows": 5,
+        "columns": 9
+    },
+    "sun": {
+        "sprite": "sun.png",
+        "width": 78,
+        "height": 78,
+        "lifespan": 812,
+        "collect_speed": 20,
+        "sky_fall_speed": 1,
+        "sky_fall_interval_min": 312,
+        "sky_fall_interval_max": 1062,
+        "sunflower_max_random_distance": 25
+    },
+    "plant": {
+        "width": 80,
+        "height": 80,
+        "offset_x": 0,
+        "offset_y": 10,
+        "types": [
+            "peashooter",
+            "sunflower",
+            "wallnut",
+            "cherrybomb"
+        ],
+        "peashooter": {
+            "hp": 8,
+            "sprite": "peashooter.png",
+            "shoot_timeout": 150,
+            "cost": 100,
+            "recharge_time": 468.75
+        },
+        "sunflower": {
+            "hp": 8,
+            "sprite": "sunflower.png",
+            "cost": 50,
+            "recharge_time": 468.75,
+            "sun_spawn_interval": 875
+        },
+        "wallnut": {
+            "hp": 72,
+            "cost": 50,
+            "recharge_time": 1875.0,
+            "sprite": "wallnut.png"
+        },
+        "cherrybomb": {
+            "hp": 9999999,
+            "cost": 15,
+            "recharge_time": 3125,
+            "sprite": "cherrybomb.png",
+            "explode_time": 62.5,
+            "damage": 9999
+        }
+    },
+    "bullet": {
+        "width": 25,
+        "height": 25,
+        "sprite": "pea.png",
+        "offset_x": 63,
+        "offset_y": 17,
+        "speed": 3
+    },
+    "zombie": {
+        "width": 78,
+        "height": 140,
+        "offset_x": 0,
+        "offset_y": -40,
+        "spawn_x": 1080,
+        "defeat_x": 180,
+        "sprite": "zombie.png",
+        "eat_timeout": 40,
+        "hp": 10
+    },
+    "menu": {
+        "background": "menu.png",
+        "exit_button_edges": [[921,556],[1032,556],[1032,672],[921,672]],
+        "easy_button_edges": [[538,105],[973,148],[937,317],[523,260]],
+        "normal_button_edges": [[530,266],[938,334],[910,439],[533,369]],
+        "hard_button_edges": [[542,381],[902,447],[880,549],[541,478]]
+    }
+}
