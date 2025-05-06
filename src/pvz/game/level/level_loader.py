@@ -53,7 +53,7 @@ def _validate_row(entry):
     max_rows = Config().field["rows"]
     for row in entry["rows"]:
         _require_type(row, int)
-        if not (0 <= row < max_rows):
+        if row < 0 or row >= max_rows:
             raise Exception("Invalid level data")
 
 

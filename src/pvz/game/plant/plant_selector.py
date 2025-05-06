@@ -97,6 +97,7 @@ class PlantSelector:
         if clicked_plant_index is None:
             return True
         self._process_clicked_plant(clicked_plant_index)
+        return True
 
 
     def _process_clicked_plant(self, clicked_plant_index):
