@@ -5,7 +5,7 @@ if TYPE_CHECKING:
 
 
 class EnemySpawner:
-    def __init__(self,game : "Game", enemies):
+    def __init__(self, game: "Game", enemies):
         self._game = game
         self._enemies = enemies
         self._index = 0

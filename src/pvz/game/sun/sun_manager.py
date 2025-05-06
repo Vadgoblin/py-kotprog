@@ -1,9 +1,11 @@
-import pygame
 import random
-from src.pvz.game import soundPlayer, field
-from src.pvz.config.config import Config
-from src.pvz.game.sun.sun import Sun
 from typing import TYPE_CHECKING
+
+import pygame
+
+from src.pvz.config.config import Config
+from src.pvz.game import sound_player, field
+from src.pvz.game.sun.sun import Sun
 
 if TYPE_CHECKING:
     from src.pvz.game.game import Game
@@ -14,7 +16,9 @@ rnd = random.Random()
 
 
 def _get_next_sky_sun_timeout():
-    return rnd.randint(int(sun_config["sky_fall_interval_min"]), int(sun_config["sky_fall_interval_max"]))
+    sky_fall_interval_min = int(sun_config["sky_fall_interval_min"])
+    sky_fall_interval_max = int(sun_config["sky_fall_interval_max"])
+    return rnd.randint(sky_fall_interval_min, sky_fall_interval_max)
 
 
 class SunManager:
@@ -27,11 +31,11 @@ class SunManager:
         self._sky_fall_speed = sun_config["sky_fall_speed"]
         self._sunflower_max_random_distance = sun_config["sunflower_max_random_distance"]
 
-    def spawn_sun(self,row, col):
+    def spawn_sun(self, row, col):
         d = self._sunflower_max_random_distance
         x = field.col_to_x(col) + rnd.randint(-d, d)
         y = field.row_to_y(row) + rnd.randint(-d, d)
-        new_sun = Sun(x,y)
+        new_sun = Sun(x, y)
         self._suns.append(new_sun)
 
     def draw(self, screen):
@@ -65,8 +69,8 @@ class SunManager:
         start_x = target_x
         start_y = field_y / 3
 
-        sun = Sun(start_x,start_y)
-        sun.animate(target_x,target_y,self._sky_fall_speed)
+        sun = Sun(start_x, start_y)
+        sun.animate(target_x, target_y, self._sky_fall_speed)
         self._suns.append(sun)
 
     def _sun_tick(self):
@@ -93,9 +97,11 @@ class SunManager:
             if sun.is_clicked(event):
                 self._collect_sun(sun)
                 return True
+            
+        return False
 
-    def _collect_sun(self, sun : "Sun"):
-        soundPlayer.play_sun_pickup()
+    def _collect_sun(self, sun: "Sun"):
+        sound_player.play_sun_pickup()
         collected_sun_pos = self._game.plant_selector.sun_position
         sun.animate_and_die(*collected_sun_pos, animation_speed=self._collect_speed)
         self._increase_collected_amount(25)

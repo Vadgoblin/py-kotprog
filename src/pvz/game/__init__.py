@@ -1,5 +1,5 @@
-from .gameProxy import GameProxy as Game
-from .gameStatus import GameStatus
-from .level import levelLoader
+from .game_proxy import GameProxy as Game
+from .game_status import GameStatus
+from .level import level_loader
 
-__all__ = ["Game", "GameStatus","levelLoader"]
+__all__ = ["Game", "GameStatus", "level_loader"]

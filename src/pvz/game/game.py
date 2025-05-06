@@ -1,21 +1,23 @@
-from .bullet.bulletManager import BulletManager
-from .enemySpawner import EnemySpawner
-from .field import Field
-from .plant.plantManager import PlantManager
-from .plant.plantSelector import PlantSelector
-from .soundPlayer import _SoundPlayer
-from .sun.sunManager import SunManager
-from .zombie.zombie_manager import ZombieManager
 from typing import TYPE_CHECKING
-from .gameStatus import GameStatus
-from . import soundPlayer
+
+from . import sound_player
+from .bullet.bullet_manager import BulletManager
+from .enemy_spawner import EnemySpawner
+from .field import Field
+from .game_status import GameStatus
+from .plant.plant_manager import PlantManager
+from .plant.plant_selector import PlantSelector
+from .sound_player import _SoundPlayer
+from .sun.sun_manager import SunManager
+from .zombie.zombie_manager import ZombieManager
 
 if TYPE_CHECKING:
     import pygame
     from src.pvz.game.level.level import Level
 
+
 class Game:
-    def __init__(self, level :"Level"):
+    def __init__(self, level: "Level"):
         self._field = Field(self)
         self._plant_manager = PlantManager(self)
         self._zombie_manager = ZombieManager(self)
@@ -27,7 +29,7 @@ class Game:
 
         self._game_status = GameStatus.ONGOING
 
-        soundPlayer.play_bgm()
+        sound_player.play_bgm()
 
     @property
     def field(self):
@@ -61,7 +63,6 @@ class Game:
     def game_status(self):
         return self._game_status
 
-
     def draw(self, screen):
         self._field.draw(screen)
         self._plant_manager.draw(screen)
@@ -80,19 +81,20 @@ class Game:
         self._plant_selector.on_tick()
         self._enemy_spawner.on_tick()
 
-    def on_event(self, event : "pygame.event.Event"):
-        if self._sun_manager.on_event(event): return
-        if self._plant_selector.on_event(event): return
+    def on_event(self, event: "pygame.event.Event"):
+        if self._sun_manager.on_event(event):
+            return
+        if self._plant_selector.on_event(event):
+            return
         self._field.on_event(event)
-
 
     def victory(self):
         self._game_status = GameStatus.VICTORY
-        soundPlayer.stop_music()
-        soundPlayer.play_win_music()
+        sound_player.stop_music()
+        sound_player.play_win_music()
         print("victory")
 
     def defeat(self):
         self._game_status = GameStatus.DEFEAT
-        soundPlayer.stop_music()
+        sound_player.stop_music()
         print("defeat")

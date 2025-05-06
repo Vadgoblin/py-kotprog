@@ -1,7 +1,7 @@
 import unittest
 from src.pvz.config.config import Config
 from unittest.mock import Mock
-from src.pvz.game.bullet.bulletManager import BulletManager
+from src.pvz.game.bullet.bullet_manager import BulletManager
 
 
 class TestBulletManager(unittest.TestCase):

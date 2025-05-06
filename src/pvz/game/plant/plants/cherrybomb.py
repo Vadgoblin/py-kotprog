@@ -1,12 +1,12 @@
-from src.pvz.config.config import Config
-from src.pvz.game import soundPlayer
-from src.pvz.game.plant.plants.abstractPlant import AbstractPlant
-from src.pvz.assets.asset_loader import load_sprite
 from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from src.pvz.game.plant.plantManager import PlantManager
+from src.pvz.assets.asset_loader import load_sprite
+from src.pvz.config.config import Config
+from src.pvz.game import sound_player
+from src.pvz.game.plant.plants.abstract_plant import AbstractPlant
 
+if TYPE_CHECKING:
+    from src.pvz.game.plant.plant_manager import PlantManager
 
 config = Config().plant
 
@@ -16,6 +16,7 @@ def _get_sprite():
     width = config["width"]
     height = config["height"]
     return load_sprite(sprite_path, (width, height))
+
 
 class Cherrybomb(AbstractPlant):
     def __init__(self, plant_manager: "PlantManager", row, col):
@@ -28,12 +29,11 @@ class Cherrybomb(AbstractPlant):
     def on_tick(self):
         if self._explode_time > 0:
             self._explode_time -= 1
-            return
         else:
             self._explode()
 
     def _explode(self):
-        soundPlayer.play_cherry_bomb()
+        sound_player.play_cherry_bomb()
         zombies = self._plant_manager._game.zombie_manager.get_nearby_zombies(self._row, self._col)
         for zombie in zombies:
             zombie.suffer_damage(self._damage)

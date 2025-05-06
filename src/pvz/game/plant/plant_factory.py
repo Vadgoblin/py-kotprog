@@ -12,7 +12,6 @@ def plant_factory(plant_manager, plant_type, row, col):
     if plant_type == "wallnut":
         return Wallnut(plant_manager, row, col)
     if plant_type == "cherrybomb":
-        return Cherrybomb(plant_manager,row,col)
+        return Cherrybomb(plant_manager, row, col)
 
-    else:
-        raise Exception(f"\"{plant_type}\" is an invalid plant type")
+    raise Exception(f"\"{plant_type}\" is an invalid plant type")

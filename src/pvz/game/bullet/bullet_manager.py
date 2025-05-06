@@ -1,6 +1,7 @@
-from src.pvz.game.bullet.bullet import Bullet
-from src.pvz.config import config
 from typing import TYPE_CHECKING, List
+
+from src.pvz.config import config
+from src.pvz.game.bullet.bullet import Bullet
 
 if TYPE_CHECKING:
     from src.pvz.game.game import Game
@@ -8,8 +9,9 @@ if TYPE_CHECKING:
 
 config = config.Config().bullet
 
+
 class BulletManager:
-    def __init__(self,game:"Game"):
+    def __init__(self, game: "Game"):
         self._game = game
         self._bullets: List[List[Bullet]] = []
         for _ in range(game.field.rows):
@@ -28,7 +30,7 @@ class BulletManager:
                 if not bullet.is_alive:
                     self._bullets[bullet.row].remove(bullet)
 
-    def draw(self, screen : "Surface"):
+    def draw(self, screen: "Surface"):
         for row in range(self._game.field.rows):
             for bullet in self._bullets[row]:
                 bullet.draw(screen)

@@ -1,17 +1,17 @@
+from typing import TYPE_CHECKING, List
+
 from src.pvz.config.config import Config
 from src.pvz.game import field
 from src.pvz.game.zombie.zombie import Zombie
-from typing import TYPE_CHECKING, List
-
 
 if TYPE_CHECKING:
-    from src.pvz.game.plant.plants.abstractPlant import AbstractPlant
+    from src.pvz.game.plant.plants.abstract_plant import AbstractPlant
     from src.pvz.game.bullet.bullet import Bullet
     from src.pvz.game.game import Game
 
 
 class ZombieManager:
-    def __init__(self, game:"Game"):
+    def __init__(self, game: "Game"):
         self._game = game
         self._zombies: List[List[Zombie]] = []
         self._defeat_x = Config().zombie["defeat_x"]
@@ -22,7 +22,7 @@ class ZombieManager:
         field.validate_row(row)
         self._zombies[row].append(Zombie(self, row))
 
-    def does_plant_see_zombie(self, plant:"AbstractPlant"):
+    def does_plant_see_zombie(self, plant: "AbstractPlant"):
         row = plant.row
         col = plant.col
         for zombie in self._zombies[row]:
@@ -47,7 +47,7 @@ class ZombieManager:
     def get_nearby_zombies(self, row, col):
         zombies = []
         x = field.col_to_x(col)
-        for r in range(row-1, row+2):
+        for r in range(row - 1, row + 2):
             if r < 0 or r >= self._game.field.rows:
                 continue
             for zombie in self._zombies[r]:

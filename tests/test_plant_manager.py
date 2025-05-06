@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
-from src.pvz.game.plant.plantManager import PlantManager
+from src.pvz.game.plant.plant_manager import PlantManager
 from src.pvz.config.config import Config
 from src.pvz.game.plant.plants.peashooter import Peashooter
 

@@ -1,6 +1,7 @@
 import json
-from importlib.resources import files
 import numbers
+from importlib.resources import files
+
 from src.pvz.config import Config
 from src.pvz.game.level.level import Level
 
@@ -12,34 +13,40 @@ def load_level(name):
     level = Level(level_data)
     return level
 
+
 def _resolve_level_path(name: str):
-    return files('pvz').joinpath("levels",f"{name}.json")
+    return files('pvz').joinpath("levels", f"{name}.json")
+
 
 def _load_level_data(level_file):
     with level_file.open() as file:
         level = json.load(file)
     return level
 
+
 def _validate_level_data(level_data):
-    if not isinstance(level_data,list):
+    if not isinstance(level_data, list):
         raise Exception("Invalid level data")
 
     for entry in level_data:
         _validate_entry(entry)
 
+
 def _validate_entry(entry):
     _require_type(entry, dict)
 
     required_keys = ["sleep", "rows"]
-    _require_keys(entry,required_keys)
+    _require_keys(entry, required_keys)
 
     _validate_sleep(entry)
     _validate_row(entry)
+
 
 def _validate_sleep(entry):
     _require_type(entry["sleep"], numbers.Number)
     if entry["sleep"] < 0:
         raise Exception("Invalid level data")
+
 
 def _validate_row(entry):
     _require_type(entry["rows"], list)
@@ -49,10 +56,12 @@ def _validate_row(entry):
         if not (0 <= row < max_rows):
             raise Exception("Invalid level data")
 
+
 def _require_keys(_dict, keys):
     for key in keys:
         if key not in _dict:
             raise Exception("Invalid level data")
+
 
 def _require_type(obj, expected_type):
     if not isinstance(obj, expected_type):

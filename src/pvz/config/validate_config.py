@@ -1,28 +1,27 @@
+from numbers import Number
 from typing import List
 
 from src.pvz import config
-from numbers import Number
 
-_config : "config.Config|None" = None
 
 def validate_config():
     try:
-        global _config
         _config = config.Config()
 
-        _validate_game()
-        _validate_field()
-        _validate_sun()
-        _validate_plant()
-        _validate_plant_types()
-        _validate_bullet()
-        _validate_zombie()
-        _validate_audio()
-        _validate_menu()
+        _validate_game(_config)
+        _validate_field(_config)
+        _validate_sun(_config)
+        _validate_plant(_config)
+        _validate_plant_types(_config)
+        _validate_bullet(_config)
+        _validate_zombie(_config)
+        _validate_audio(_config)
+        _validate_menu(_config)
     except:
         _rise_exception()
 
-def _validate_game():
+
+def _validate_game(_config):
     game = _config.game
     expected_game = {
         "width": Number,
@@ -34,7 +33,8 @@ def _validate_game():
     }
     _validate_dict(game, expected_game)
 
-def _validate_field():
+
+def _validate_field(_config):
     field = _config.field
     expected_field = {
         "x": Number,
@@ -46,7 +46,8 @@ def _validate_field():
     }
     _validate_dict(field, expected_field)
 
-def _validate_sun():
+
+def _validate_sun(_config):
     sun = _config.sun
     expected_sun = {
         "sprite": str,
@@ -59,9 +60,10 @@ def _validate_sun():
         "sky_fall_interval_max": Number,
         "sunflower_max_random_distance": Number
     }
-    _validate_dict(sun,expected_sun)
+    _validate_dict(sun, expected_sun)
 
-def _validate_plant():
+
+def _validate_plant(_config):
     plant = _config.plant
     expected_plant = {
         "width": Number,
@@ -70,9 +72,10 @@ def _validate_plant():
         "offset_y": Number,
         "types": list
     }
-    _validate_dict(plant,expected_plant)
+    _validate_dict(plant, expected_plant)
 
-def _validate_plant_types():
+
+def _validate_plant_types(_config):
     plant = _config.plant
     expected_plant_types = {
         "peashooter": {
@@ -106,14 +109,15 @@ def _validate_plant_types():
     }
     for plant_name, expected_fields in expected_plant_types.items():
         if plant_name not in plant:
-            raise Exception(f"error while parsing config")
+            raise Exception("error while parsing _config")
         for key, expected_type in expected_fields.items():
             if key not in plant[plant_name]:
-                raise Exception(f"error while parsing config")
+                raise Exception("error while parsing _config")
             elif not isinstance(plant[plant_name][key], expected_type):
-                raise Exception(f"error while parsing config")
+                raise Exception("error while parsing _config")
 
-def _validate_bullet():
+
+def _validate_bullet(_config):
     bullet = _config.bullet
     expected_bullet = {
         "width": Number,
@@ -123,9 +127,10 @@ def _validate_bullet():
         "offset_y": Number,
         "speed": Number
     }
-    _validate_dict(bullet,expected_bullet)
+    _validate_dict(bullet, expected_bullet)
 
-def _validate_zombie():
+
+def _validate_zombie(_config):
     zombie = _config.zombie
     expected_zombie = {
         "width": Number,
@@ -138,9 +143,10 @@ def _validate_zombie():
         "eat_timeout": Number,
         "hp": Number
     }
-    _validate_dict(zombie,expected_zombie)
+    _validate_dict(zombie, expected_zombie)
 
-def _validate_audio():
+
+def _validate_audio(_config):
     audio = _config.audio
     expected_audio = {
         "num_of_channels": int,
@@ -152,9 +158,10 @@ def _validate_audio():
         "splat": str,
         "cherry_bomb": str,
     }
-    _validate_dict(audio,expected_audio)
+    _validate_dict(audio, expected_audio)
 
-def _validate_menu():
+
+def _validate_menu(_config):
     menu = _config.menu
     expected_menu = {
         "background": str,
@@ -163,7 +170,7 @@ def _validate_menu():
         "normal_button_edges": List,
         "hard_button_edges": List,
     }
-    _validate_dict(menu,expected_menu)
+    _validate_dict(menu, expected_menu)
 
     def is_coord_pair(pair):
         return (isinstance(pair, list) and len(pair) == 2 and
@@ -183,5 +190,6 @@ def _validate_dict(dict_, excepted):
         if key not in dict_ or not isinstance(dict_[key], expected_type):
             _rise_exception()
 
+
 def _rise_exception():
-    raise Exception(f"invalid config")
+    raise Exception("invalid config")

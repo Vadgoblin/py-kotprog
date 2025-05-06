@@ -1,15 +1,17 @@
-from src.pvz.game import soundPlayer, field
-from src.pvz.config.config import Config
-from src.pvz.assets.asset_loader import load_sprite
 from typing import TYPE_CHECKING
+
+from src.pvz.assets.asset_loader import load_sprite
+from src.pvz.config.config import Config
+from src.pvz.game import sound_player, field
 from src.pvz.game.bullet.bullet import Bullet
 
 if TYPE_CHECKING:
     from src.pvz.game.zombie.zombie_manager import ZombieManager
-    from src.pvz.game.plant.plants.abstractPlant import AbstractPlant
+    from src.pvz.game.plant.plants.abstract_plant import AbstractPlant
+
 
 class Zombie:
-    def __init__(self,zombie_manager : "ZombieManager", row):
+    def __init__(self, zombie_manager: "ZombieManager", row):
         config = Config().zombie
         self._zombie_manager = zombie_manager
         self._row = row
@@ -46,7 +48,7 @@ class Zombie:
     def is_alive(self):
         return self._hp > 0
 
-    def is_hit_by_bullet(self, bullet:"Bullet"):
+    def is_hit_by_bullet(self, bullet: "Bullet"):
         return self._x <= bullet.x + bullet.width and self._x + self._width >= bullet.x
 
     def suffer_damage(self, amount=1):
@@ -71,5 +73,5 @@ class Zombie:
             self._eat_timeout -= 1
         else:
             plant.suffer_damage()
-            soundPlayer.play_chomp()
+            sound_player.play_chomp()
             self._eat_timeout = Config().zombie["eat_timeout"]

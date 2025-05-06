@@ -1,9 +1,12 @@
 import math
-from src.pvz.config.config import Config
-from src.pvz.assets.asset_loader import load_sprite
+
 import pygame
 
+from src.pvz.assets.asset_loader import load_sprite
+from src.pvz.config.config import Config
+
 config = Config().sun
+
 
 class Sun:
     def __init__(self, x, y):
@@ -39,15 +42,15 @@ class Sun:
         if event.type != pygame.MOUSEBUTTONDOWN:
             return False
         click_pos = event.dict["pos"]
+
+        return self._is_clicked(click_pos)
+
+    def _is_clicked(self, click_pos):
         click_x, click_y = click_pos
 
-        if self._x > click_x:
+        if self._x > click_x or self._y > click_y:
             return False
-        if self._y > click_y:
-            return False
-        if self._x + self._width < click_x:
-            return False
-        if self._y + self._height < click_y:
+        if  self._x + self._width < click_x or self._y + self._height < click_y:
             return False
         return True
 

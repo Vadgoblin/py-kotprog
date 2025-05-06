@@ -1,9 +1,12 @@
+import sys
+from typing import TYPE_CHECKING
+
 import pygame
+
 from src.pvz.config.config import Config
 from .game import Game
 from .game import GameStatus
-from typing import TYPE_CHECKING
-from .gameoverScreen import display_victory_screen, display_defeat_screen
+from .gameover_screen import display_victory_screen, display_defeat_screen
 
 if TYPE_CHECKING:
     from src.pvz.game.level.level import Level
@@ -11,13 +14,14 @@ if TYPE_CHECKING:
 
 _clock = pygame.time.Clock()
 
+
 class GameProxy:
-    def __init__(self,screen : "Surface"):
+    def __init__(self, screen: "Surface"):
         self._screen = screen
         self._game = None
         self._target_fps = Config().game["target_fps"]
 
-    def start(self, level : "Level"):
+    def start(self, level: "Level"):
         self._game = Game(level)
         while self._is_game_ongoing():
             self._process_events()
@@ -37,7 +41,7 @@ class GameProxy:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                exit(0)
+                sys.exit(0)
             if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEMOTION:
                 self._game.on_event(event)
 

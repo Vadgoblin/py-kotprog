@@ -1,8 +1,9 @@
-from src.pvz.game import field
-from src.pvz.config.config import Config
 from src.pvz.assets.asset_loader import load_sprite
+from src.pvz.config.config import Config
+from src.pvz.game import field
 
 config = Config().plant
+
 
 class GhostPlantManager:
     def __init__(self):
@@ -29,7 +30,7 @@ class GhostPlantManager:
         self._type = plant_type
         x = field.col_to_x(col) + self._offset_x
         y = field.row_to_y(row) + self._offset_y
-        self._pos = (x,y)
+        self._pos = (x, y)
 
     def hide(self):
         self._type = None

@@ -1,25 +1,26 @@
 import pygame
+import pygame.mixer
 
 from src.pvz.config import Config
 from src.pvz.menu import Menu
-import pygame.mixer
 
-_screen : "pygame.Surface|None"= None
 
 def main():
-    _initialize_screen()
-    menu = Menu(_screen)
+    screen = get_screen()
+    menu = Menu(screen)
     menu.show()
 
-def _initialize_screen():
-    global _screen
+
+def get_screen():
     config = Config()
     pygame.init()
     x = config.game["width"]
     y = config.game["height"]
 
-    _screen = pygame.display.set_mode((x, y))
+    screen = pygame.display.set_mode((x, y))
     pygame.display.set_caption('PvZ paint edition')
+    return screen
+
 
 if __name__ == "__main__":
     main()

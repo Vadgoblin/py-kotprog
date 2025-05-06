@@ -1,17 +1,21 @@
+import sys
+
 import pygame
-from src.pvz.game import Game
-from ._button import Button
-from src.pvz.config import Config
-from src.pvz.game.level.levelLoader import load_level
+
 from src.pvz.assets.asset_loader import load_sprite
+from src.pvz.config import Config
+from src.pvz.game import Game
+from src.pvz.game.level.level_loader import load_level
+from ._button import Button
 
 
 def _exit():
     pygame.quit()
-    exit(0)
+    sys.exit()
+
 
 class Menu:
-    def __init__(self,screen : "pygame.Surface"):
+    def __init__(self, screen: "pygame.Surface"):
         self._screen = screen
         self._config = Config()
         self._background = self._get_background()
@@ -47,7 +51,7 @@ class Menu:
         for event in pygame.event.get():
             self._process_event(event)
 
-    def _process_event(self,event):
+    def _process_event(self, event):
         if event.type == pygame.QUIT:
             _exit()
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -69,6 +73,7 @@ class Menu:
         for name, btn in self._buttons.items():
             if btn.is_clicked(click_pos):
                 return name
+        return None
 
     def _play(self, difficulty):
         level = load_level(f"{difficulty}")

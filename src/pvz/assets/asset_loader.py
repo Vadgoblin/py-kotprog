@@ -1,14 +1,16 @@
-from importlib.resources import files
-from PIL import Image
-import tempfile
 import shutil
-import pygame
-from pathlib import Path
-from pygame.mixer import Sound
+import tempfile
 from functools import lru_cache
+from importlib.resources import files
+from pathlib import Path
+
+import pygame
+from PIL import Image
+from pygame.mixer import Sound
+
 
 @lru_cache(maxsize=None)
-def load_sprite(name, size = None, ghost = False):
+def load_sprite(name, size=None, ghost=False):
     path = _resolve_asset_file(name)
 
     with path.open('rb') as f:
@@ -21,12 +23,13 @@ def load_sprite(name, size = None, ghost = False):
         pil_image = pil_image.resize(size, Image.Resampling.BICUBIC)
 
     if ghost:
-        r, g, b, a = pil_image.split()
+        _, _, _, a = pil_image.split()
         a = a.point(lambda p: p // 2)
         pil_image.putalpha(a)
 
     scaled_image = pygame.image.fromstring(pil_image.tobytes(), pil_image.size, pil_image.mode)
     return scaled_image
+
 
 @lru_cache(maxsize=None)
 def load_font(name, size):
@@ -38,6 +41,7 @@ def load_font(name, size):
             shutil.copyfileobj(src, tmp)
 
     return pygame.font.Font(str(tmp_path), size)
+
 
 @lru_cache(maxsize=None)
 def load_sound(name):
@@ -51,4 +55,4 @@ def load_sound(name):
 
 
 def _resolve_asset_file(asset_name: str):
-    return files('pvz').joinpath("assets",asset_name)
+    return files('pvz').joinpath("assets", asset_name)

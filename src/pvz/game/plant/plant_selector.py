@@ -1,14 +1,17 @@
-import pygame
-from src.pvz.config.config import Config
 from typing import TYPE_CHECKING
-from src.pvz.assets.asset_loader import load_sprite
+
+import pygame
+
 from src.pvz.assets.asset_loader import load_font
+from src.pvz.assets.asset_loader import load_sprite
+from src.pvz.config.config import Config
 
 if TYPE_CHECKING:
     from src.pvz.game.game import Game
 
 plant_config = Config().plant
 sun_config = Config().sun
+
 
 def _load_plants():
     plants = []
@@ -25,7 +28,7 @@ def _load_plants():
 
 
 class PlantSelector:
-    def __init__(self,game : "Game", x = 240, y = 0):
+    def __init__(self, game: "Game", x=240, y=0):
         self._x = x
         self._y = y
         self._width = 500
@@ -42,7 +45,7 @@ class PlantSelector:
 
     def _load_font(self):
         font_filename = Config().game["number_font"]
-        self._font = load_font(font_filename,18)
+        self._font = load_font(font_filename, 18)
 
     def _load_sun_sprite(self):
         sun_sprite_path = sun_config["sprite"]
@@ -66,7 +69,7 @@ class PlantSelector:
     def sun_position(self):
         return self._sun_position
 
-    def disable_plant(self,plant_type):
+    def disable_plant(self, plant_type):
         plant = self._get_plant_by_type(plant_type)
         plant["recharge_status"] = plant["recharge_time"]
         self._unselect_plant()
@@ -80,7 +83,9 @@ class PlantSelector:
     def on_event(self, event: "pygame.event.Event"):
         if event.type != pygame.MOUSEBUTTONDOWN:
             return False
+        return self._process_click(event)
 
+    def _process_click(self, event):
         click_pos = event.dict["pos"]
         click_x, click_y = click_pos
         if click_x < self._x or click_y < self._y:
@@ -91,7 +96,10 @@ class PlantSelector:
         clicked_plant_index = self._get_clicked_plant_index(click_pos)
         if clicked_plant_index is None:
             return True
+        self._process_clicked_plant(clicked_plant_index)
 
+
+    def _process_clicked_plant(self, clicked_plant_index):
         if self._selected_plant_index == clicked_plant_index:
             self._unselect_plant()
             return True
@@ -132,17 +140,17 @@ class PlantSelector:
         self._draw_plants()
 
     def _draw_container(self):
-        pygame.draw.rect(self._screen, (109, 50, 18),(self._x, self._y, self._width, self._height), border_radius=15)
-        pygame.draw.rect(self._screen, (148, 72, 32),(self._x, self._y, self._width, self._height), 5, 15)
+        pygame.draw.rect(self._screen, (109, 50, 18), (self._x, self._y, self._width, self._height), border_radius=15)
+        pygame.draw.rect(self._screen, (148, 72, 32), (self._x, self._y, self._width, self._height), 5, 15)
 
     def _draw_sun(self):
-        pygame.draw.line(self._screen,(148, 72, 32),(self._x + 85,0),(self._x + 85, self._height -1), 5)
+        pygame.draw.line(self._screen, (148, 72, 32), (self._x + 85, 0), (self._x + 85, self._height - 1), 5)
         self._screen.blit(self._sun_sprite, self._sun_position)
-        pygame.draw.rect(self._screen, (236,237,179), (self._x + 10, self._y + 85, 68, 20), border_radius=8)
+        pygame.draw.rect(self._screen, (236, 237, 179), (self._x + 10, self._y + 85, 68, 20), border_radius=8)
 
     def _draw_sun_amount(self):
         count = str(self._get_held_sun_amount())
-        text = self._font.render(count,True,"black")
+        text = self._font.render(count, True, "black")
         offset = text.get_width() / 2
         self._screen.blit(text, (self._x + 45 - offset, self._y + 86))
 
@@ -154,20 +162,20 @@ class PlantSelector:
         plant = self._plants[index]
 
         x = self._x + index * 80 + 96
-        pygame.draw.rect(self._screen,(173,192,148),(x + 2,self._y + 15,65,71))
-        pygame.draw.rect(self._screen,"white",(x + 2,self._y + 86,65,18))
+        pygame.draw.rect(self._screen, (173, 192, 148), (x + 2, self._y + 15, 65, 71))
+        pygame.draw.rect(self._screen, "white", (x + 2, self._y + 86, 65, 18))
 
-        color = "white" if index==self._selected_plant_index else "black"
-        pygame.draw.rect(self._screen, color, (x, self._y + 12, 69, 95),3,7)
+        color = "white" if index == self._selected_plant_index else "black"
+        pygame.draw.rect(self._screen, color, (x, self._y + 12, 69, 95), 3, 7)
 
         cost = str(plant["cost"])
-        cost_text = self._font.render(cost,1,"black")
+        cost_text = self._font.render(cost, 1, "black")
         cost_offset = cost_text.get_width() / 2
-        self._screen.blit(cost_text,(x + 35 - cost_offset, self._y + 86))
-        self._screen.blit(plant["sprite"],(x + 4, self._y + 20))
+        self._screen.blit(cost_text, (x + 35 - cost_offset, self._y + 86))
+        self._screen.blit(plant["sprite"], (x + 4, self._y + 20))
 
         if plant["cost"] > self._get_held_sun_amount():
-            self._draw_plant_dimmer(index,100)
+            self._draw_plant_dimmer(index, 100)
 
         recharge_status = plant["recharge_status"]
         recharge_time = plant["recharge_time"]
@@ -177,7 +185,7 @@ class PlantSelector:
 
     def _draw_plant_dimmer(self, index, percentage):
         x = self._x + index * 80 + 96
-        s = pygame.Surface((65,90 * percentage / 100))
+        s = pygame.Surface((65, 90 * percentage / 100))
         s.set_alpha(128)
         s.fill("black")
         self._screen.blit(s, (x + 2, self._y + 15))

@@ -1,7 +1,8 @@
-from types import MappingProxyType
 import json
-from .validateConfig import validate_config
 from importlib.resources import files
+from types import MappingProxyType
+
+from .validate_config import validate_config
 
 
 class Config:

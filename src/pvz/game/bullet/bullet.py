@@ -1,16 +1,18 @@
-from src.pvz.game import soundPlayer, field
-from src.pvz.config.config import Config
-from src.pvz.assets.asset_loader import  load_sprite
 from typing import TYPE_CHECKING
 
+from src.pvz.assets.asset_loader import load_sprite
+from src.pvz.config.config import Config
+from src.pvz.game import sound_player, field
+
 if TYPE_CHECKING:
-    from src.pvz.game.bullet.bulletManager import BulletManager
+    from src.pvz.game.bullet.bullet_manager import BulletManager
     from pygame.surface import Surface
 
 config = Config().bullet
 
+
 class Bullet:
-    def __init__(self,bullet_manager : "BulletManager", row, col):
+    def __init__(self, bullet_manager: "BulletManager", row, col):
         self._bullet_manager = bullet_manager
         self._row = row
         self._x = field.col_to_x(col) + config["offset_x"]
@@ -46,10 +48,9 @@ class Bullet:
         if hit_zombie is None:
             self._x += config["speed"]
         else:
-            soundPlayer.play_splat()
+            sound_player.play_splat()
             hit_zombie.suffer_damage()
             self._is_alive = False
 
-    def draw(self, screen : "Surface"):
+    def draw(self, screen: "Surface"):
         screen.blit(self._sprite, (self._x, self._y))
-        pass

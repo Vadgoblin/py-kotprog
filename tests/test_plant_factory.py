@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock
-from src.pvz.game.plant.plantFactory import plant_factory
+from src.pvz.game.plant.plant_factory import plant_factory
 from src.pvz.game.plant.plants import peashooter,sunflower,wallnut,cherrybomb
 
 class TestPlantFactory(unittest.TestCase):
