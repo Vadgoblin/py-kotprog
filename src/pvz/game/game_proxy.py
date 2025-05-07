@@ -42,7 +42,7 @@ class GameProxy:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit(0)
-            if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.MOUSEMOTION:
+            if event.type in (pygame.MOUSEBUTTONDOWN, pygame.MOUSEMOTION):
                 self._game.on_event(event)
 
     def _tick(self):

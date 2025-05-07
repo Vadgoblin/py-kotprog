@@ -30,7 +30,7 @@ def _have_button_pressed():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit(0)
-        if event.type == pygame.MOUSEBUTTONDOWN or event.type == pygame.KEYDOWN:
+        if event.type in (pygame.MOUSEBUTTONDOWN, pygame.KEYDOWN):
             return True
     return False
 

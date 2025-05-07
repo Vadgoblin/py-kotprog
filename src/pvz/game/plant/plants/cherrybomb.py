@@ -34,7 +34,7 @@ class Cherrybomb(AbstractPlant):
 
     def _explode(self):
         sound_player.play_cherry_bomb()
-        zombies = self._plant_manager._game.zombie_manager.get_nearby_zombies(self._row, self._col)
+        zombies = self._plant_manager.get_nearby_zombies(self._row, self._col)
         for zombie in zombies:
             zombie.suffer_damage(self._damage)
         self._hp = 0

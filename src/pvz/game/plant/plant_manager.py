@@ -13,7 +13,7 @@ plant_config = Config().plant
 
 def _validate_plant_type(plant_type):
     if plant_type not in plant_config["types"]:
-        raise f"{plant_type} is an invalid plant type"
+        raise Exception(f"{plant_type} is an invalid plant type")
 
 
 def _get_plant_cost(plant_type):
@@ -40,12 +40,17 @@ class PlantManager:
         sun_amount = self._game.sun_manager.sun_amount
         plant_cost = _get_plant_cost(plant_type)
         if sun_amount < plant_cost:
-            raise Exception(f"Not enough sun. {plant_type} costs {plant_cost} but only have {sun_amount}")
+            raise Exception(
+                f"Not enough sun. {plant_type} costs {plant_cost} but only have {sun_amount}"
+            )
 
         sound_player.play_plant()
         self._plants[row][col] = plant_factory(self, plant_type, row, col)
         self._game.sun_manager.decrease_collected_amount(plant_cost)
         self._game.plant_selector.disable_plant(plant_type)
+
+    def get_nearby_zombies(self, row, col):
+        return self._game.zombie_manager.get_nearby_zombies(row, col)
 
     def _validate_empty_space(self, row, col):
         if not self.is_space_empty(row, col):
