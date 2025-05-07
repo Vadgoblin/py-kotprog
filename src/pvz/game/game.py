@@ -92,9 +92,7 @@ class Game:
         self._game_status = GameStatus.VICTORY
         sound_player.stop_music()
         sound_player.play_win_music()
-        print("victory")
 
     def defeat(self):
         self._game_status = GameStatus.DEFEAT
         sound_player.stop_music()
-        print("defeat")

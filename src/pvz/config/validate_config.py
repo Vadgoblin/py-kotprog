@@ -2,23 +2,21 @@ from numbers import Number
 from typing import List
 
 from src.pvz import config
+from .invalid_config_error import InvalidConfigError
 
 
 def validate_config():
-    try:
-        _config = config.Config()
+    _config = config.Config()
 
-        _validate_game(_config)
-        _validate_field(_config)
-        _validate_sun(_config)
-        _validate_plant(_config)
-        _validate_plant_types(_config)
-        _validate_bullet(_config)
-        _validate_zombie(_config)
-        _validate_audio(_config)
-        _validate_menu(_config)
-    except:
-        _rise_exception()
+    _validate_game(_config)
+    _validate_field(_config)
+    _validate_sun(_config)
+    _validate_plant(_config)
+    _validate_plant_types(_config)
+    _validate_bullet(_config)
+    _validate_zombie(_config)
+    _validate_audio(_config)
+    _validate_menu(_config)
 
 
 def _validate_game(_config):
@@ -109,12 +107,12 @@ def _validate_plant_types(_config):
     }
     for plant_name, expected_fields in expected_plant_types.items():
         if plant_name not in plant:
-            raise Exception("error while parsing _config")
+            raise InvalidConfigError()
         for key, expected_type in expected_fields.items():
             if key not in plant[plant_name]:
-                raise Exception("error while parsing _config")
-            elif not isinstance(plant[plant_name][key], expected_type):
-                raise Exception("error while parsing _config")
+                raise InvalidConfigError()
+            if not isinstance(plant[plant_name][key], expected_type):
+                raise InvalidConfigError()
 
 
 def _validate_bullet(_config):
@@ -182,14 +180,10 @@ def _validate_menu(_config):
 
     for edge_key in ["exit_button_edges", "easy_button_edges", "normal_button_edges", "hard_button_edges"]:
         if edge_key in menu and not is_quad_edge_list(menu[edge_key]):
-            _rise_exception()
+            raise InvalidConfigError()
 
 
 def _validate_dict(dict_, excepted):
     for key, expected_type in excepted.items():
         if key not in dict_ or not isinstance(dict_[key], expected_type):
-            _rise_exception()
-
-
-def _rise_exception():
-    raise Exception("invalid config")
+            raise InvalidConfigError()

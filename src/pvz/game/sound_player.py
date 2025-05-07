@@ -74,4 +74,4 @@ class _SoundPlayer:
             print(f"Error: Sound effect '{sfx_name}' not found!")
 
     def stop_music(self):
-        mixer.music.stop()
+        mixer.Channel(0).stop()

@@ -1,3 +1,7 @@
+"""
+Main entry point for the PvZ game.
+"""
+
 import pygame
 import pygame.mixer
 

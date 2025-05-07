@@ -25,18 +25,15 @@ class Config:
         if not config_path.is_file():
             raise Exception("config file not found")
 
-        try:
-            with config_path.open() as config_file:
-                config = json.load(config_file)
-                self.plant = MappingProxyType(config["plant"])
-                self.zombie = MappingProxyType(config["zombie"])
-                self.field = MappingProxyType(config["field"])
-                self.bullet = MappingProxyType(config["bullet"])
-                self.game = MappingProxyType(config["game"])
-                self.sun = MappingProxyType(config["sun"])
-                self.menu = MappingProxyType(config["menu"])
-                self.audio = MappingProxyType(config["audio"])
-        except:
-            raise Exception("error occurred while parsing config")
+        with config_path.open() as config_file:
+            config = json.load(config_file)
+            self.plant = MappingProxyType(config["plant"])
+            self.zombie = MappingProxyType(config["zombie"])
+            self.field = MappingProxyType(config["field"])
+            self.bullet = MappingProxyType(config["bullet"])
+            self.game = MappingProxyType(config["game"])
+            self.sun = MappingProxyType(config["sun"])
+            self.menu = MappingProxyType(config["menu"])
+            self.audio = MappingProxyType(config["audio"])
 
         validate_config()

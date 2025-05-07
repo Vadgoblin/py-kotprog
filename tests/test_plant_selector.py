@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import Mock, patch
 from src.pvz.game.plant.plant_selector import PlantSelector
-from src.pvz.config.config import Config
 
 class TestPlantSelector(unittest.TestCase):
     @patch('pygame.font.Font')

@@ -1,5 +1,4 @@
 import sys
-
 import pygame
 
 from src.pvz.assets.asset_loader import load_sprite
@@ -10,7 +9,7 @@ from ._button import Button
 
 
 def _exit():
-    pygame.quit()
+    pygame.quit() # [no-member]
     sys.exit()
 
 
