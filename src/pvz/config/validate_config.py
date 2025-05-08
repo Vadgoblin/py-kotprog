@@ -178,7 +178,8 @@ def _validate_menu(_config):
         return (isinstance(edge_list, list) and len(edge_list) == 4 and
                 all(is_coord_pair(p) for p in edge_list))
 
-    for edge_key in ["exit_button_edges", "easy_button_edges", "normal_button_edges", "hard_button_edges"]:
+    for edge_key in ["exit_button_edges", "easy_button_edges",
+                     "normal_button_edges", "hard_button_edges"]:
         if edge_key in menu and not is_quad_edge_list(menu[edge_key]):
             raise InvalidConfigError()
 

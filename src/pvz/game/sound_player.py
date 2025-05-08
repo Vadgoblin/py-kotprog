@@ -3,7 +3,6 @@ from pygame import mixer
 from src.pvz.assets.asset_loader import load_sound
 from src.pvz.config import Config
 
-
 _sound_player = None
 
 

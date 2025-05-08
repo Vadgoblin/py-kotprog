@@ -19,7 +19,8 @@ class Bullet:
         self._y = field.row_to_y(row) + config["offset_y"]
         self._width = config["width"]
         self._height = config["height"]
-        self._sprite = load_sprite(config["sprite"], (self._width, self._height))
+        self._sprite = load_sprite(config["sprite"],
+                                   (self._width, self._height))
         self._despawn_x = Config().game["width"]
         self._is_alive = True
 

@@ -16,7 +16,7 @@ from pygame.mixer import Sound
 
 
 @lru_cache(maxsize=None)
-def load_sprite(name:str, size:tuple[int, int]|None=None, ghost=False):
+def load_sprite(name: str, size: tuple[int, int] | None = None, ghost=False):
     """
     Loads the specified sprite.
 
@@ -31,9 +31,11 @@ def load_sprite(name:str, size:tuple[int, int]|None=None, ghost=False):
         image = pygame.image.load(f)
 
     if size is None:
-        pil_image = Image.frombytes("RGBA", image.get_size(), pygame.image.tostring(image, "RGBA"))
+        pil_image = Image.frombytes("RGBA", image.get_size(),
+                                    pygame.image.tostring(image, "RGBA"))
     else:
-        pil_image = Image.frombytes("RGBA", image.get_size(), pygame.image.tostring(image, "RGBA"))
+        pil_image = Image.frombytes("RGBA", image.get_size(),
+                                    pygame.image.tostring(image, "RGBA"))
         pil_image = pil_image.resize(size, Image.Resampling.BICUBIC)
 
     if ghost:
@@ -41,7 +43,8 @@ def load_sprite(name:str, size:tuple[int, int]|None=None, ghost=False):
         a = a.point(lambda p: p // 2)
         pil_image.putalpha(a)
 
-    scaled_image = pygame.image.fromstring(pil_image.tobytes(), pil_image.size, pil_image.mode)
+    scaled_image = pygame.image.fromstring(pil_image.tobytes(), pil_image.size,
+                                           pil_image.mode)
     return scaled_image
 
 

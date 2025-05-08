@@ -54,7 +54,8 @@ class PlantManager:
 
     def _validate_empty_space(self, row, col):
         if not self.is_space_empty(row, col):
-            raise Exception(f"There is already a plant at row {row} column {col}")
+            raise Exception(
+                f"There is already a plant at row {row} column {col}")
 
     def does_plant_see_zombie(self, plant):
         return self._game.zombie_manager.does_plant_see_zombie(plant)
@@ -66,7 +67,8 @@ class PlantManager:
             if plant is None:
                 continue
             plant_x = field.col_to_x(plant.col)
-            if zombie.x <= plant_x + plant.width * (4 / 5) and zombie.x + zombie.width >= plant_x + plant.width / 3:
+            if zombie.x <= plant_x + plant.width * (
+                    4 / 5) and zombie.x + zombie.width >= plant_x + plant.width / 3:
                 return plant
         return None
 

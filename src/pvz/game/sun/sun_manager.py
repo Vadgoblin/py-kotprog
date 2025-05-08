@@ -29,7 +29,8 @@ class SunManager:
         self._sky_sun_timeout = _get_next_sky_sun_timeout() / 2
         self._collect_speed = sun_config["collect_speed"]
         self._sky_fall_speed = sun_config["sky_fall_speed"]
-        self._sunflower_max_random_distance = sun_config["sunflower_max_random_distance"]
+        self._sunflower_max_random_distance = sun_config[
+            "sunflower_max_random_distance"]
 
     def spawn_sun(self, row, col):
         d = self._sunflower_max_random_distance
@@ -64,8 +65,10 @@ class SunManager:
         field_width = field_config["width"]
         field_height = field_config["height"]
 
-        target_x = rnd.randint(int(field_x * 1.2), int((field_x + field_width) * 0.9))
-        target_y = rnd.randint(int(field_y * 1.2), int((field_y + field_height) * 0.8))
+        target_x = rnd.randint(int(field_x * 1.2),
+                               int((field_x + field_width) * 0.9))
+        target_y = rnd.randint(int(field_y * 1.2),
+                               int((field_y + field_height) * 0.8))
         start_x = target_x
         start_y = field_y / 3
 
@@ -97,11 +100,12 @@ class SunManager:
             if sun.is_clicked(event):
                 self._collect_sun(sun)
                 return True
-            
+
         return False
 
     def _collect_sun(self, sun: "Sun"):
         sound_player.play_sun_pickup()
         collected_sun_pos = self._game.plant_selector.sun_position
-        sun.animate_and_die(*collected_sun_pos, animation_speed=self._collect_speed)
+        sun.animate_and_die(*collected_sun_pos,
+                            animation_speed=self._collect_speed)
         self._increase_collected_amount(25)

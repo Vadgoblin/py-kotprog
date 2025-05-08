@@ -9,7 +9,7 @@ from ._button import Button
 
 
 def _exit():
-    pygame.quit() # [no-member]
+    pygame.quit()  # [no-member]
     sys.exit()
 
 

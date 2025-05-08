@@ -9,7 +9,6 @@ class Button:
     """
 
     def __init__(
-
             self,
             edges: "tuple[tuple[int, int], tuple[int, int], tuple[int, int], tuple[int, int]]"
     ):
