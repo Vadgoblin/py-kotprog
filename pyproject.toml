@@ -2,6 +2,12 @@
 name = "pvz"
 version = "1.0"
 
+dependencies = [
+    "pygame>=2.0.0",
+    "pillow>=11.1.0"
+]
+
+
 [tool.setuptools]
 package-dir = {"" = "src"}
 
