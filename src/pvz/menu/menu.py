@@ -1,4 +1,5 @@
 import sys
+
 import pygame
 
 from src.pvz.assets.asset_loader import load_sprite

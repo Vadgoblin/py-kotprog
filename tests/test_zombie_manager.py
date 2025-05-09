@@ -1,7 +1,9 @@
 import unittest
 from unittest.mock import Mock
-from src.pvz.game.zombie.zombie_manager import ZombieManager
+
 from src.pvz.config import Config
+from src.pvz.game.zombie.zombie_manager import ZombieManager
+
 
 class TestZombieManager(unittest.TestCase):
     def setUp(self):
@@ -12,15 +14,16 @@ class TestZombieManager(unittest.TestCase):
 
     def test_init(self):
         self.assertEqual(self.zombie_manager._game, self.mock_game)
-        self.assertEqual(len(self.zombie_manager._zombies),self.rows)
+        self.assertEqual(len(self.zombie_manager._zombies), self.rows)
 
     def test_spawn_zombie_valid(self):
         self.zombie_manager.spawn_zombie(0)
 
-        self.assertEqual(len(self.zombie_manager._zombies[0]),1)
+        self.assertEqual(len(self.zombie_manager._zombies[0]), 1)
 
     def test_spawn_zombie_invalid(self):
-        self.assertRaises(Exception,self.zombie_manager.spawn_zombie,self.rows)
+        self.assertRaises(Exception, self.zombie_manager.spawn_zombie,
+                          self.rows)
 
     def test_does_plant_see_zombie_true(self):
         row = 2
@@ -51,22 +54,23 @@ class TestZombieManager(unittest.TestCase):
         mock_bullet.y = y
         mock_bullet.row = 0
         mock_bullet.width = 1
-        mock_bullet.height  = 1
+        mock_bullet.height = 1
 
-        self.assertEqual(self.zombie_manager.get_zombie_hit_by_bullet(mock_bullet),zombie)
+        self.assertEqual(
+            self.zombie_manager.get_zombie_hit_by_bullet(mock_bullet), zombie)
 
     def test_get_nearby_zombies(self):
         for i in range(0, self.rows):
             self.zombie_manager.spawn_zombie(i)
             self.zombie_manager.spawn_zombie(i)
 
-        self.assertEqual(len(self.zombie_manager.get_nearby_zombies(3,9)),6)
+        self.assertEqual(len(self.zombie_manager.get_nearby_zombies(3, 9)), 6)
 
     def test_get_number_of_zombies(self):
         self.zombie_manager.spawn_zombie(2)
         self.zombie_manager.spawn_zombie(4)
 
-        self.assertEqual(self.zombie_manager.get_number_of_zombies(),2)
+        self.assertEqual(self.zombie_manager.get_number_of_zombies(), 2)
 
     def test_on_tick(self):
         mock_zombie1 = Mock()
@@ -89,6 +93,7 @@ class TestZombieManager(unittest.TestCase):
         self.zombie_manager.on_tick()
 
         self.mock_game.defeat.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()
