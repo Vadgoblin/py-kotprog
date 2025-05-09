@@ -1,8 +1,9 @@
 def is_point_in_trapezoid(trapezoid, point):
     """
-    Determines if a point is inside a trapezoid using the ray-casting algorithm.
+    Determines if a point is inside a trapezoid.
 
-    :param trapezoid: List of 4 tuples (x, y) representing the vertices of the trapezoid.
+    :param trapezoid: List of 4 tuples (x, y) representing the vertices
+        of the trapezoid.
     :param point: A tuple (x, y) representing the point.
     :return: True if the point is inside the trapezoid, False otherwise.
     """

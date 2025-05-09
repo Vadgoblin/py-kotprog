@@ -50,7 +50,7 @@ class Sun:
 
         if self._x > click_x or self._y > click_y:
             return False
-        if  self._x + self._width < click_x or self._y + self._height < click_y:
+        if self._x + self._width < click_x or self._y + self._height < click_y:
             return False
         return True
 
