@@ -1,4 +1,4 @@
-# 🌻🧟‍ Python Plants vs Zombies paint edition
+# 🌻🧟‍ Plants vs Zombies paint edition
 
 A simplified, modular clone of *Plants vs Zombies* with *paint* graphics, written in Python.
 
