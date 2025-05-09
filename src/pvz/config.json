@@ -40,7 +40,7 @@
         "peashooter": {
             "hp": 8,
             "sprite": "peashooter.png",
-            "shoot_timeout": 150,
+            "shoot_timeout": 120,
             "cost": 100,
             "recharge_time": 468.75
         },
@@ -59,7 +59,7 @@
         },
         "cherrybomb": {
             "hp": 9999999,
-            "cost": 15,
+            "cost": 150,
             "recharge_time": 3125,
             "sprite": "cherrybomb.png",
             "explode_time": 62.5,
@@ -72,7 +72,7 @@
         "sprite": "pea.png",
         "offset_x": 63,
         "offset_y": 17,
-        "speed": 3
+        "speed": 5
     },
     "zombie": {
         "width": 78,
