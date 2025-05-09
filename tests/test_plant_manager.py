@@ -23,7 +23,7 @@ class TestPlantManager(unittest.TestCase):
         for i in range(0, self.rows):
             self.assertEqual(len(self.plant_manager._plants[i]), self.cols)
 
-    @patch('src.pvz.game.soundPlayer.play_plant')
+    @patch('src.pvz.game.sound_player.play_plant')
     def test_plant_plant_valid(self,mock_play_plant):
         self.mock_sun_manager.sun_amount = 1000
         self.plant_manager.plant_plant("peashooter",0,0)
@@ -31,21 +31,21 @@ class TestPlantManager(unittest.TestCase):
         self.assertIsInstance(self.plant_manager._plants[0][0],Peashooter)
         mock_play_plant.assert_called_once()
 
-    @patch('src.pvz.game.soundPlayer.play_plant')
+    @patch('src.pvz.game.sound_player.play_plant')
     def test_plant_plant_invalid_plant(self,mock_play_plant):
         self.mock_sun_manager.sun_amount = 1000
 
         self.assertRaises(Exception,self.plant_manager.plant_plant,"asd",0,0)
         mock_play_plant.assert_not_called()
 
-    @patch('src.pvz.game.soundPlayer.play_plant')
+    @patch('src.pvz.game.sound_player.play_plant')
     def test_plant_plant_invalid_not_enough_sun_amount(self,mock_play_plant):
         self.mock_sun_manager.sun_amount = 1
 
         self.assertRaises(Exception,self.plant_manager.plant_plant,"sunflower",0,0)
         mock_play_plant.assert_not_called()
 
-    @patch('src.pvz.game.soundPlayer.play_plant')
+    @patch('src.pvz.game.sound_player.play_plant')
     def test_plant_plant_invalid_taken_place(self,mock_play_plant):
         self.mock_sun_manager.sun_amount = 10000
         self.plant_manager.plant_plant("peashooter", 0, 0)

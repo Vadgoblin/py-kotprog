@@ -16,7 +16,7 @@ class TestZombie(unittest.TestCase):
         self.assertEqual(zombie.y, y)
         self.assertTrue(zombie.width != 0)
 
-    @patch('src.pvz.game.soundPlayer.play_chomp')
+    @patch('src.pvz.game.sound_player.play_chomp')
     def test_tick_movement(self, mock_play_chomp):
         mock_zombie_manager = Mock()
         mock_zombie_manager.get_blocking_plant.return_value = None
@@ -29,7 +29,7 @@ class TestZombie(unittest.TestCase):
         self.assertTrue(before_x>after_x)
         mock_play_chomp.assert_not_called()
 
-    @patch('src.pvz.game.soundPlayer.play_chomp')
+    @patch('src.pvz.game.sound_player.play_chomp')
     def test_tick_blocked(self, mock_play_chomp):
         mock_zombie_manager = Mock()
         mock_plant = Mock()
