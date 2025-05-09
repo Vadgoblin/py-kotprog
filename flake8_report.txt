@@ -1,0 +1,44 @@
+src/pvz/config/__init__.py:1:1: F401 '.config.Config' imported but unused
+src/pvz/game/field.py:49:80: E501 line too long (90 > 79 characters)
+src/pvz/game/field.py:56:80: E501 line too long (93 > 79 characters)
+src/pvz/game/plant/plant_manager.py:44:80: E501 line too long (93 > 79 characters)
+src/pvz/game/plant/plant_manager.py:71:80: E501 line too long (84 > 79 characters)
+src/pvz/game/plant/plant_selector.py:112:13: E125 continuation line with same indent as next logical line
+src/pvz/game/plant/plant_selector.py:132:80: E501 line too long (87 > 79 characters)
+src/pvz/game/zombie/zombie.py:52:80: E501 line too long (87 > 79 characters)
+src/pvz/menu/__init__.py:5:1: F401 '.menu.Menu' imported but unused
+src/pvz/menu/_button.py:8:80: E501 line too long (89 > 79 characters)
+src/pvz/menu/_button.py:13:80: E501 line too long (94 > 79 characters)
+[1msrc/pvz/config/__init__.py[m[36m:[m1[36m:[m1[36m:[m [1m[31mF401[m '.config.Config' imported but unused
+[1msrc/pvz/game/field.py[m[36m:[m49[36m:[m80[36m:[m [1m[31mE501[m line too long (90 > 79 characters)
+[1msrc/pvz/game/field.py[m[36m:[m56[36m:[m80[36m:[m [1m[31mE501[m line too long (93 > 79 characters)
+[1msrc/pvz/game/plant/plant_manager.py[m[36m:[m44[36m:[m80[36m:[m [1m[31mE501[m line too long (93 > 79 characters)
+[1msrc/pvz/game/plant/plant_manager.py[m[36m:[m71[36m:[m80[36m:[m [1m[31mE501[m line too long (84 > 79 characters)
+[1msrc/pvz/game/plant/plant_selector.py[m[36m:[m112[36m:[m13[36m:[m [1m[31mE125[m continuation line with same indent as next logical line
+[1msrc/pvz/game/plant/plant_selector.py[m[36m:[m132[36m:[m80[36m:[m [1m[31mE501[m line too long (87 > 79 characters)
+[1msrc/pvz/game/zombie/zombie.py[m[36m:[m52[36m:[m80[36m:[m [1m[31mE501[m line too long (87 > 79 characters)
+[1msrc/pvz/menu/__init__.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m '.menu.Menu' imported but unused
+[1msrc/pvz/menu/_button.py[m[36m:[m8[36m:[m80[36m:[m [1m[31mE501[m line too long (89 > 79 characters)
+[1msrc/pvz/menu/_button.py[m[36m:[m13[36m:[m80[36m:[m [1m[31mE501[m line too long (94 > 79 characters)
+src/pvz/config/__init__.py:1:1: F401 '.config.Config' imported but unused
+src/pvz/game/field.py:49:80: E501 line too long (90 > 79 characters)
+src/pvz/game/field.py:56:80: E501 line too long (93 > 79 characters)
+src/pvz/game/plant/plant_manager.py:44:80: E501 line too long (93 > 79 characters)
+src/pvz/game/plant/plant_manager.py:71:80: E501 line too long (84 > 79 characters)
+src/pvz/game/plant/plant_selector.py:112:13: E125 continuation line with same indent as next logical line
+src/pvz/game/plant/plant_selector.py:132:80: E501 line too long (87 > 79 characters)
+src/pvz/game/zombie/zombie.py:52:80: E501 line too long (87 > 79 characters)
+src/pvz/menu/__init__.py:5:1: F401 '.menu.Menu' imported but unused
+src/pvz/menu/_button.py:8:80: E501 line too long (89 > 79 characters)
+src/pvz/menu/_button.py:13:80: E501 line too long (94 > 79 characters)
+[1msrc/pvz/config/__init__.py[m[36m:[m1[36m:[m1[36m:[m [1m[31mF401[m '.config.Config' imported but unused
+[1msrc/pvz/game/field.py[m[36m:[m49[36m:[m80[36m:[m [1m[31mE501[m line too long (90 > 79 characters)
+[1msrc/pvz/game/field.py[m[36m:[m56[36m:[m80[36m:[m [1m[31mE501[m line too long (93 > 79 characters)
+[1msrc/pvz/game/plant/plant_manager.py[m[36m:[m44[36m:[m80[36m:[m [1m[31mE501[m line too long (93 > 79 characters)
+[1msrc/pvz/game/plant/plant_manager.py[m[36m:[m71[36m:[m80[36m:[m [1m[31mE501[m line too long (84 > 79 characters)
+[1msrc/pvz/game/plant/plant_selector.py[m[36m:[m112[36m:[m13[36m:[m [1m[31mE125[m continuation line with same indent as next logical line
+[1msrc/pvz/game/plant/plant_selector.py[m[36m:[m132[36m:[m80[36m:[m [1m[31mE501[m line too long (87 > 79 characters)
+[1msrc/pvz/game/zombie/zombie.py[m[36m:[m52[36m:[m80[36m:[m [1m[31mE501[m line too long (87 > 79 characters)
+[1msrc/pvz/menu/__init__.py[m[36m:[m5[36m:[m1[36m:[m [1m[31mF401[m '.menu.Menu' imported but unused
+[1msrc/pvz/menu/_button.py[m[36m:[m8[36m:[m80[36m:[m [1m[31mE501[m line too long (89 > 79 characters)
+[1msrc/pvz/menu/_button.py[m[36m:[m13[36m:[m80[36m:[m [1m[31mE501[m line too long (94 > 79 characters)
