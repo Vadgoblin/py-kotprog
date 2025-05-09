@@ -7,7 +7,7 @@ _sound_player = None
 
 
 def play_bgm():
-    _get_sound_player().play_music("bgm")
+    _get_sound_player().play_music("bgm",True)
 
 
 def play_win_music():
@@ -55,10 +55,13 @@ class _SoundPlayer:
         self._num_of_channels = Config().audio["num_of_channels"]
         mixer.set_num_channels(self._num_of_channels)
 
-    def play_music(self, music_name):
+    def play_music(self, music_name,loop=False):
         if music_name in self._audio:
             channel = mixer.Channel(0)
-            channel.play(self._audio[music_name], loops=-1)
+            if loop:
+                channel.play(self._audio[music_name], loops=-1)
+            else:
+                channel.play(self._audio[music_name])
         else:
             print(f"Error: Music '{music_name}' not found!")
 
